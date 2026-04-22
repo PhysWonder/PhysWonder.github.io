@@ -154,11 +154,11 @@
     }
     .figure-overlay{
       position:absolute;
-      inset:auto 24px 24px auto;
+      inset:60% auto auto 74%;
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      justify-content:flex-end;
+      justify-content:flex-start;
       pointer-events:none;
     }
     .figure-badge,.detail-trigger{
@@ -200,22 +200,44 @@
     }
     .story-block{
       display:grid;
-      gap:20px;
+      gap:34px;
     }
     .story-grid{
       display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:22px;
+      grid-template-columns:1fr;
+      gap:18px;
       align-items:start;
     }
     .story-copy{
-      padding:22px 24px;
+      padding:0;
+    }
+    .story-copy.card{
+      background:transparent;
+      border:none;
+      box-shadow:none;
+      backdrop-filter:none;
+      border-radius:0;
     }
     .story-copy h3{
-      margin-bottom:10px;
+      margin-bottom:8px;
+      font-size:clamp(24px,2.8vw,32px);
     }
     .story-copy p:last-child{
       margin-bottom:0;
+    }
+    .story-copy p{
+      max-width:none;
+      font-size:16px;
+      line-height:1.72;
+    }
+    .story-copy .eyebrow{
+      margin-bottom:14px;
+    }
+    .story-figure{
+      width:100%;
+    }
+    .story-figure .figure-viewer{
+      aspect-ratio:16/8.2;
     }
     .framework-copy{
       max-width:none;
@@ -403,6 +425,9 @@
       .container{width:min(var(--max), calc(100% - 20px))}
       .card-body{padding:18px}
       .video-meta{padding:14px 16px 16px}
+      .figure-overlay{
+        inset:56% auto auto 66%;
+      }
     }
   </style>
 </head>
@@ -520,8 +545,8 @@
         <div class="section-head">
           <div>
             <div class="eyebrow">Method Story</div>
-            <h2>From Unified Simulation to Internalized Control</h2>
-            <p>The page follows the paper's central logic directly: PhysWonder-3D builds the constitutive simulation space, and PhysWonder-Ctrl turns that constitutive representation into controllable video generation.</p>
+            <h2>PhysWonder-3D, Then PhysWonder-Ctrl</h2>
+            <p>First establish a unified constitutive simulation space. Then turn that simulation-coupled representation into controllable video generation.</p>
           </div>
         </div>
 
@@ -531,19 +556,19 @@
               <div>
                 <div class="eyebrow">Stage 1</div>
                 <h3>PhysWonder-3D</h3>
-                <p>PhysWonder-3D is the physically grounded simulation engine of the paper. It unifies rigid, elastic, snow-like, and sand-like constitutive behaviors in one hybrid MPM pipeline, enabling scalable synthesis from recovered geometry and material settings.</p>
-                <p>This section should make one thing immediately clear: the project is not just generating motion, but building a constitutive world model that produces simulation-coupled supervision.</p>
+                <p>PhysWonder-3D is the physically grounded simulation engine of the paper. It unifies rigid, elastic, snow-like, and sand-like constitutive behaviors in one hybrid MPM pipeline, turning recovered geometry and material settings into scalable simulation-coupled supervision.</p>
               </div>
             </article>
-            <figure class="card figure-card mini-figure">
-              <div class="figure-viewer">
-                <img class="figure-image" src="assets/figures/PhysWonder-3D_Pipeline.png" alt="PhysWonder-3D framework figure">
-              </div>
-              <figcaption class="figcap">
-                <strong>Figure A. PhysWonder-3D.</strong> Geometry recovery, hybrid MPM simulation, constitutive sampling, rendering, and deformation-gradient generation are organized in one full pipeline.
-              </figcaption>
-            </figure>
           </div>
+
+          <figure class="card figure-card story-figure">
+            <div class="figure-viewer">
+              <img class="figure-image" src="assets/figures/PhysWonder-3D_Pipeline.png" alt="PhysWonder-3D framework figure">
+            </div>
+            <figcaption class="figcap">
+              <strong>Figure A. PhysWonder-3D.</strong> Geometry recovery, hybrid MPM simulation, constitutive sampling, rendering, and deformation-gradient generation are organized in one full pipeline.
+            </figcaption>
+          </figure>
 
           <div class="grid grid-4">
             <article class="card video-card">
@@ -569,25 +594,23 @@
               <div>
                 <div class="eyebrow">Stage 2</div>
                 <h3>PhysWonder-Ctrl</h3>
-                <p>PhysWonder-Ctrl internalizes deformation-gradient-based constitutive control into a dual-branch generation framework. Instead of requiring explicit control videos at inference time, it predicts constitutive-aware latent control from the learned internal representation.</p>
-                <p>The central message is that deformation gradients are a stronger intermediate signal than trajectories or sparse control cues, because they encode internal material response directly.</p>
+                <p>PhysWonder-Ctrl internalizes deformation-gradient-based constitutive control into a dual-branch generation framework. Instead of requiring explicit control videos at inference time, it predicts constitutive-aware latent control from a stronger intermediate signal that captures internal material response directly.</p>
               </div>
             </article>
-            <figure class="card figure-card">
-              <div class="figure-viewer">
-                <img class="figure-image" src="assets/figures/PhysWonder-Ctrl_Pipeline_v2.png" alt="PhysWonder-Ctrl framework figure">
-                <div class="figure-overlay">
-                  <button class="detail-trigger" type="button" data-modal-open="predictor-modal">Inspect Predictor</button>
-                </div>
-              </div>
-              <figcaption class="figcap">
-                <strong>Figure B. PhysWonder-Ctrl.</strong> The dual-branch control framework internalizes constitutive guidance and removes the need for explicit deformation-control videos during inference.
-              </figcaption>
-              <div class="figcap-actions" style="padding:0 18px 16px">
-                <button class="figure-link" type="button" data-modal-open="predictor-modal">View Control Token Predictor</button>
-              </div>
-            </figure>
           </div>
+
+          <figure class="card figure-card story-figure ctrl-stage">
+            <div class="figure-viewer">
+              <img class="figure-image" src="assets/figures/PhysWonder-Ctrl_Pipeline_v2.png" alt="PhysWonder-Ctrl framework figure">
+              <div class="figure-annotation">Stage 2</div>
+              <div class="figure-overlay">
+                <button class="detail-trigger" type="button" data-modal-open="predictor-modal">Inspect Control Latent Predictor Framework</button>
+              </div>
+            </div>
+            <figcaption class="figcap">
+              <strong>Figure B. PhysWonder-Ctrl.</strong> The dual-branch control framework internalizes constitutive guidance and removes the need for explicit deformation-control videos during inference.
+            </figcaption>
+          </figure>
 
           <div class="grid grid-4">
             <article class="card video-card">
@@ -676,14 +699,6 @@
         </div>
 
         <h3 style="margin:28px 0 16px">1. Additional PhysWonder-3D Results</h3>
-        <figure class="card figure-card mini-figure" style="margin-bottom:20px">
-          <div class="figure-viewer">
-            <img class="figure-image" src="assets/figures/PhysWonder-3D_Pipeline.png" alt="PhysWonder-3D framework figure">
-          </div>
-          <figcaption class="figcap">
-            <strong>PhysWonder-3D Framework.</strong> Unified simulation across rigid, elastic, snow-like, and sand-like materials, serving as the physically grounded data source for the rest of the paper.
-          </figcaption>
-        </figure>
         <div class="grid grid-2">
           <article class="card">
             <div class="card-body">
@@ -755,17 +770,6 @@
         </div>
 
         <h3 style="margin:42px 0 16px">3. Additional PhysWonder-Ctrl Results</h3>
-        <figure class="card figure-card" style="margin-bottom:20px">
-          <div class="figure-viewer">
-            <img class="figure-image" src="assets/figures/PhysWonder-Ctrl_Pipeline_v2.png" alt="PhysWonder-Ctrl framework figure">
-            <div class="figure-overlay">
-              <button class="detail-trigger" type="button" data-modal-open="predictor-modal">Inspect Predictor</button>
-            </div>
-          </div>
-          <figcaption class="figcap">
-            <strong>PhysWonder-Ctrl Framework.</strong> A dual-branch generation design that internalizes constitutive control and predicts control tokens at inference time.
-          </figcaption>
-        </figure>
         <div class="grid grid-4">
           <article class="card video-card">
             <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/ctrl_ref.jpg"><source src="assets/videos/ctrl_reference_input.mp4" type="video/mp4"></video></div>
