@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhysWonder Demo Page</title>
+  <meta name="description" content="Project page template for PhysWonder: Physically Controllable Video Generation via Internalized Simulation-Coupled Constitutive Representation." />
+  <style>
+    :root{
+      --bg:#f5f5f7;
+      --bg-soft:#ffffff;
+      --card:#ffffff;
+      --card-2:#f0f1f5;
+      --text:#111111;
+      --muted:#5f6673;
+      --line:rgba(17,17,17,0.10);
+      --accent:#0a84ff;
+      --accent-2:#111111;
+      --shadow:0 18px 40px rgba(15,23,42,.06);
+      --radius:22px;
+      --max:1240px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.96), transparent 28%),
+        linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 42%, #f0f1f4 100%);
+      line-height:1.6;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(var(--max), calc(100% - 32px)); margin:0 auto}
+    .section{padding:72px 0}
+    .section-tight{padding:40px 0}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 14px;border:1px solid var(--line);border-radius:999px;
+      color:#3c4452;background:rgba(255,255,255,.78);font-size:14px
+    }
+    h1,h2,h3{line-height:1.14;margin:0 0 14px}
+    h1{font-size:clamp(28px,4.6vw,48px);letter-spacing:-0.03em}
+    h2{font-size:clamp(24px,3.2vw,34px);letter-spacing:-0.02em}
+    h3{font-size:clamp(20px,2vw,26px)}
+    .rainbow-text{
+      background:linear-gradient(90deg,#ff4d4d 0%,#ff9a3c 18%,#ffd93d 34%,#55d66b 50%,#45caff 68%,#5b6cff 84%,#c85cff 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      -webkit-text-fill-color:transparent;
+    }
+    p{margin:0 0 16px;color:var(--muted)}
+    .lead{font-size:clamp(15px,1.35vw,17px);max-width:none;line-height:1.72}
+    .muted{color:var(--muted)}
+    .small{font-size:14px}
+    .center{text-align:center}
+    .grid{display:grid;gap:22px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.90));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+    }
+    .card-body{padding:22px}
+    .hero{padding:54px 0 36px}
+    .hero-top{
+      display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px
+    }
+    .hero-figure{
+      margin-top:26px;
+    }
+    .hero-figure .figure-viewer{
+      aspect-ratio:16/8.8;
+    }
+    .hero-figure .figcap{
+      text-align:left;
+    }
+    .author-line{color:#3f4652;font-size:17px}
+    .affil-line{color:var(--muted);font-size:15px}
+    .button-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      border:1px solid rgba(17,17,17,.10);border-radius:999px;padding:12px 18px;
+      background:rgba(255,255,255,.88);transition:.2s transform ease,.2s background ease,.2s box-shadow ease
+    }
+    .btn:hover{transform:translateY(-1px);background:#fff;box-shadow:0 8px 24px rgba(15,23,42,.08)}
+    .btn.primary{
+      background:#111;
+      color:#fff;
+      box-shadow:0 10px 28px rgba(17,17,17,.14);
+    }
+    .hero-media{
+      margin-top:30px;
+      display:grid;grid-template-columns:1.45fr .85fr;gap:22px;align-items:stretch;
+    }
+    .video-shell{
+      position:relative;aspect-ratio:16/9;background:#e9ebf0;
+      border-bottom:1px solid var(--line);
+    }
+    video{width:100%;height:100%;object-fit:cover;background:#e9ebf0}
+    .placeholder{
+      width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+      color:#7a818d;font-weight:600;letter-spacing:.02em;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.92), rgba(241,243,247,.95)),
+        repeating-linear-gradient(45deg, rgba(17,17,17,.02), rgba(17,17,17,.02) 12px, transparent 12px, transparent 24px);
+    }
+    .teaser-caption{
+      position:absolute;left:18px;bottom:16px;right:18px;
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      font-weight:700;font-size:14px;text-shadow:0 2px 8px rgba(0,0,0,.35)
+    }
+    .pill{
+      display:inline-flex;padding:6px 10px;border-radius:999px;
+      border:1px solid rgba(17,17,17,.08);background:rgba(255,255,255,.82)
+    }
+    .stat{
+      padding:18px 18px 14px;border-top:1px solid var(--line)
+    }
+    .stat strong{display:block;font-size:28px;color:white}
+    .list{
+      margin:0;padding-left:18px;color:var(--muted)
+    }
+    .list li{margin:8px 0}
+    .figure-card{
+      position:relative;
+      border-radius:24px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .figure-viewer{
+      position:relative;
+      aspect-ratio:16/8.7;
+      background:linear-gradient(180deg, #ffffff 0%, #fafafc 100%);
+      overflow:hidden;
+    }
+    .figure-image{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:contain;
+      object-position:center;
+      background:#fff;
+    }
+    .figure-overlay{
+      position:absolute;
+      inset:auto 24px 24px auto;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      pointer-events:none;
+    }
+    .figure-badge,.detail-trigger{
+      pointer-events:auto;
+      border-radius:999px;
+      border:1px solid rgba(17,17,17,.10);
+      background:rgba(255,255,255,.94);
+      color:#111;
+      backdrop-filter:blur(8px);
+    }
+    .figure-badge{
+      display:none;
+    }
+    .detail-trigger{
+      padding:10px 14px;
+      font-size:13px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.2s transform ease,.2s background ease,.2s box-shadow ease;
+      box-shadow:0 10px 24px rgba(15,23,42,.08);
+    }
+    .detail-trigger:hover{
+      transform:translateY(-1px);
+      background:#fff;
+    }
+    .figcap{
+      padding:14px 16px 16px;color:var(--muted);font-size:16px;line-height:1.55;border-top:1px solid rgba(17,17,17,.06)
+    }
+    .framework-stack{
+      display:grid;
+      gap:28px;
+    }
+    .framework-stack > #figures{
+      display:none;
+    }
+    .framework-copy{
+      max-width:none;
+    }
+    .framework-copy strong{
+      color:var(--text);
+    }
+    .figcap-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .figure-link{
+      display:inline-flex;
+      align-items:center;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:8px 12px;
+      background:#fff;
+      font-size:13px;
+    }
+    .mini-figures{
+      margin-top:28px;
+      order:2;
+    }
+    .ctrl-figure{
+      order:3;
+    }
+    #figures .figcap,
+    .ctrl-figure .figcap{
+      font-size:0;
+    }
+    #figures .figcap::before{
+      content:"Teaser. Start with a single uninterrupted hero figure so the method reads like a product reveal first, then a technical system.";
+      font-size:14px;
+      line-height:1.6;
+      color:var(--muted);
+      display:block;
+      margin-bottom:12px;
+    }
+    .ctrl-figure .figcap::before{
+      content:"Figure B. PhysWonder-Ctrl. The control framework stays full-width, while the predictor branch gets a separate drill-down view so the main figure remains calm.";
+      font-size:14px;
+      line-height:1.6;
+      color:var(--muted);
+      display:block;
+      margin-bottom:12px;
+    }
+    .mini-figure .figure-viewer{
+      aspect-ratio:16/9.6;
+    }
+    .predictor-modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      background:rgba(255,255,255,.72);
+      backdrop-filter:blur(16px);
+      z-index:50;
+    }
+    .predictor-modal.is-open{
+      display:flex;
+    }
+    .predictor-panel{
+      width:min(1100px, 100%);
+      max-height:min(88vh, 900px);
+      overflow:auto;
+      border-radius:30px;
+      border:1px solid rgba(17,17,17,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(248,248,250,.96));
+      box-shadow:0 24px 60px rgba(15,23,42,.12);
+      backdrop-filter:blur(16px);
+    }
+    .predictor-header{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      padding:24px 24px 0;
+    }
+    .predictor-title{
+      max-width:none;
+    }
+    .predictor-title h3{
+      margin-bottom:8px;
+    }
+    .predictor-chips{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:12px 0 0;
+    }
+    .predictor-chip{
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:12px;
+      color:#f7fbff;
+      border:1px solid rgba(255,255,255,.26);
+      background:rgba(255,255,255,.10);
+    }
+    .predictor-close{
+      width:42px;
+      height:42px;
+      border:1px solid rgba(17,17,17,.08);
+      border-radius:999px;
+      background:#fff;
+      color:#111;
+      font-size:22px;
+      line-height:1;
+      cursor:pointer;
+      flex:0 0 auto;
+    }
+    .predictor-body{
+      padding:20px 24px 24px;
+    }
+    .predictor-frame{
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid rgba(17,17,17,.06);
+      background:linear-gradient(180deg, #ffffff, #f7f7f9);
+    }
+    .predictor-frame .figure-viewer{
+      aspect-ratio:16/10;
+      background:transparent;
+    }
+    .section-head{
+      display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:28px
+    }
+    .section-head p{max-width:none}
+    #abstract h2{
+      font-size:clamp(20px,2.2vw,28px);
+      margin-bottom:8px;
+    }
+    #abstract .card-body{
+      padding:18px 20px;
+    }
+    .video-card .video-shell{aspect-ratio:16/10}
+    .video-meta{padding:16px 18px 18px}
+    .video-meta h4{margin:0 0 8px;font-size:18px}
+    .tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .tag{
+      font-size:12px;padding:5px 9px;border-radius:999px;
+      border:1px solid var(--line);color:#d7def7;background:rgba(255,255,255,.03)
+    }
+    .callout{
+      padding:20px 22px;border-left:3px solid var(--accent);
+      background:rgba(255,255,255,.76);border-radius:16px
+    }
+    .twocol{
+      display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:start
+    }
+    .comparison-grid{
+      display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px
+    }
+    .comparison-item{
+      background:rgba(255,255,255,.78);border:1px solid var(--line);
+      border-radius:16px;padding:12px
+    }
+    .comparison-item .video-shell{aspect-ratio:4/5;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+    .comparison-item h5{margin:10px 0 4px;font-size:14px}
+    .comparison-item p{font-size:13px;line-height:1.45}
+    .footer{
+      padding:38px 0 54px;border-top:1px solid var(--line);margin-top:20px
+    }
+    .code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background:rgba(17,17,17,.05);padding:2px 6px;border-radius:8px;color:#1f2632
+    }
+    .note{
+      color:#3f4652;background:rgba(255,255,255,.82);border:1px solid rgba(17,17,17,.08);
+      padding:14px 16px;border-radius:16px
+    }
+
+    @media (max-width: 1100px){
+      .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .comparison-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .hero-media,.twocol,.grid-3,.grid-2{grid-template-columns:1fr}
+    }
+    @media (max-width: 760px){
+      .section{padding:56px 0}
+      .grid-4,.comparison-grid{grid-template-columns:1fr}
+      .container{width:min(var(--max), calc(100% - 20px))}
+      .card-body{padding:18px}
+      .video-meta{padding:14px 16px 16px}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="hero-top">
+        <div class="eyebrow">SIGGRAPH Asia 2026 Submission · Demo Page</div>
+        <h1><span class="rainbow-text">PhysWonder</span>: Physically Controllable Video Generation via Internalized Simulation‑Coupled Constitutive Representation</h1>
+        <p class="author-line">Anonymous Author(s)</p>
+        
+        <div class="button-row">
+          <a class="btn primary" href="#videos">Demo Videos</a>
+          <a class="btn" href="#framework">Framework</a>
+          <a class="btn" href="#abstract">Abstract</a>
+          <a class="btn" href="#framework">Key Figures</a>
+          <!-- <a class="btn" href="#bibtex">BibTeX</a> -->
+        </div>
+
+        <figure class="card figure-card hero-figure">
+          <div class="figure-viewer">
+            <img class="figure-image" src="assets/figures/Teaser.png" alt="PhysWonder teaser figure">
+          </div>
+          <figcaption class="figcap">
+            <div class="framework-copy">
+              <strong>Teaser.</strong> A single overview visual placed immediately under the title, so visitors understand the paper at a glance before scrolling into demos and framework details.
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="hero-media">
+        <article class="card">
+          <div class="video-shell">
+            <video controls muted loop playsinline poster="assets/posters/teaser-main.jpg">
+              <source src="assets/videos/teaser_main.mp4" type="video/mp4" />
+            </video>
+            <div class="teaser-caption">
+              <span class="pill">PhysWonder-3D · Unified multi-material simulation</span>
+              <span class="pill">PhysWonder-Ctrl · Internalized constitutive control</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Hero teaser</h3>
+            <p>
+              Use a single polished teaser here: left half shows reference image / reconstructed scene, right half shows generated physically controllable result with deformation-gradient overlay cues. This mirrors the paper’s opening message that deformation gradients couple particle-level motion with underlying force response.
+            </p>
+          </div>
+        </article>
+
+        <aside class="grid">
+          <article class="card">
+            <div class="card-body">
+              <h3>What to show first</h3>
+              <ul class="list">
+                <li>One <strong>cross-material teaser</strong> with rigid, elastic, snow, and sand behavior in one sequence.</li>
+                <li>One <strong>simulation → constitutive map → generated video</strong> triplet for the core story.</li>
+                <li>One <strong>control generalization</strong> clip showing inference without explicit deformation-control video.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="card">
+            <div class="stat">
+              <span class="muted small">Dataset synthesis</span>
+              <strong>10,000</strong>
+              <span class="muted">physically grounded constitutive simulation videos</span>
+            </div>
+            <div class="stat">
+              <span class="muted small">Inference</span>
+              <strong>~2 min</strong>
+              <span class="muted">per video on a single RTX 4090</span>
+            </div>
+          </article>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="abstract" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Abstract</div>
+            <h2>Leave the abstract visible above the fold</h2>
+          </div>
+        </div>
+
+        <article class="card">
+          <div class="card-body">
+            <p class="lead">
+              The physical world is governed by material-dependent constitutive behaviors, yet current video generation models still struggle to produce physically plausible and controllable dynamics across diverse materials. We present <strong>PhysWonder</strong>, a unified framework built around <strong>simulation-coupled constitutive representations</strong>. PhysWonder-3D enables unified constitutive simulation and scalable physically grounded data synthesis through a decomposition-based hybrid MPM, while PhysWonder-Ctrl internalizes deformation-gradient-based constitutive control into a dual-branch video generation framework. By treating deformation gradients as simulation-coupled intermediate supervision, the model learns constitutive-aware latent control without requiring explicit structured control inputs during inference.
+            </p>
+            <div class="grid grid-3" style="margin-top:24px">
+              <div class="callout">
+                <h3>PhysWonder-3D</h3>
+                <p>Unified elastic, soft, plastic, and rigid material simulation in one particle-grid framework, with scalable data synthesis from single images.</p>
+              </div>
+              <div class="callout">
+                <h3>Deformation Gradient</h3>
+                <p>The central constitutive representation: more faithful than trajectories or sparse forces because it captures internal material response.</p>
+              </div>
+              <div class="callout">
+                <h3>PhysWonder-Ctrl</h3>
+                <p>Dual-branch training internalizes control as latent knowledge, so explicit deformation-control videos are no longer needed at inference.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="framework" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Framework</div>
+            <h2>Core Figures, Presented Full Width</h2>
+            <p>The key visuals now read as large image panels on a white stage: teaser first, then the PhysWonder-3D pipeline, then PhysWonder-Ctrl with an optional predictor detail view.</p>
+          </div>
+        </div>
+
+        <div class="framework-stack">
+          <figure class="card figure-card" id="figures">
+            <div class="figure-viewer">
+              <img class="figure-image" src="assets/figures/Teaser.png" alt="PhysWonder teaser figure">
+            </div>
+            <figcaption class="figcap">
+              <strong>Figure slot A — PhysWonder-3D.</strong> Keep this wide. It should show the end-to-end pipeline: segmentation and geometry recovery, decomposition-based hybrid MPM, constitutive sampling, rendering, and deformation-gradient representation.
+            </figcaption>
+          </figure>
+
+          <figure class="card figure-card ctrl-figure">
+            <div class="figure-viewer">
+              <img class="figure-image" src="assets/figures/PhysWonder-Ctrl_Pipeline_v2.png" alt="PhysWonder-Ctrl framework figure">
+              <div class="figure-overlay">
+                <span class="figure-badge">Main generator + latent predictor + train / inference split</span>
+                <button class="detail-trigger" type="button" data-modal-open="predictor-modal">Inspect Predictor</button>
+              </div>
+            </div>
+            <figcaption class="figcap">
+              <strong>Figure slot B — PhysWonder-Ctrl.</strong> Keep this equally large. It should show the dual-branch setup: main generator branch, control latent predictor branch, and training/inference split.
+            </figcaption>
+            <div class="figcap-actions" style="padding:0 18px 16px">
+              <button class="figure-link" type="button" data-modal-open="predictor-modal">View Predictor Detail</button>
+            </div>
+          </figure>
+        </div>
+
+        <div class="grid mini-figures">
+          <figure class="card figure-card mini-figure">
+            <div class="figure-viewer">
+              <img class="figure-image" src="assets/figures/PhysWonder-3D_Pipeline.png" alt="PhysWonder-3D framework figure">
+            </div>
+            <figcaption class="figcap">
+              <strong>Figure A - PhysWonder-3D.</strong> The full simulation pipeline is shown as one wide strip so the left-to-right process remains legible and visually calm.
+            </figcaption>
+          </figure>
+          <article class="card"><div class="card-body">
+            <h3>Why this ordering works</h3>
+            <p>Teaser first, then simulation, then controllable generation. Giving each figure its own row makes the story easier to scan and much more deliberate.</p>
+          </div></article>
+          <article class="card"><div class="card-body">
+            <h3>Space guidance</h3>
+            <p>These are now rendered as stable PNG images rather than embedded PDFs, so spacing stays correct and the panels feel cleaner across screen sizes.</p>
+          </div></article>
+          <article class="card"><div class="card-body">
+            <h3>Asset naming</h3>
+            <p>Live assets come from <span class="code">Teaser.png</span>, <span class="code">PhysWonder-3D_Pipeline.png</span>, <span class="code">PhysWonder-Ctrl_Pipeline_v2.png</span>, and <span class="code">PhysWonder-Ctrl_Predictor.png</span>.</p>
+          </div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="videos" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Demo Videos</div>
+            <h2>Recommended video layout for this paper</h2>
+            <p>The best structure is not object-by-object, but <strong>claim-by-claim</strong>: first show multi-material simulation, then deformation-gradient visualization, then controllable generation, then comparisons and generalization.</p>
+          </div>
+        </div>
+
+        <div class="note" style="margin-bottom:24px">
+          Replace all placeholder sources with your real assets. The sections below are already organized according to the paper’s central claims, so you only need to drop in files.
+        </div>
+
+        <h3 style="margin:28px 0 16px">1. Main teaser: one row that immediately communicates the whole paper</h3>
+        <div class="grid grid-4">
+          <article class="card video-card">
+            <div class="video-shell">
+              <video controls muted loop playsinline poster="assets/posters/teaser_rigid.jpg"><source src="assets/videos/teaser_rigid_mug.mp4" type="video/mp4"></video>
+            </div>
+            <div class="video-meta">
+              <h4>Rigid object</h4>
+              <p>Mug or table sequence. Show stable rigid-body motion with weak deformation gradients.</p>
+              <div class="tag-row"><span class="tag">teaser</span><span class="tag">rigid</span><span class="tag">weak gradients</span></div>
+            </div>
+          </article>
+
+          <article class="card video-card">
+            <div class="video-shell">
+              <video controls muted loop playsinline poster="assets/posters/teaser_elastic.jpg"><source src="assets/videos/teaser_elastic_apple.mp4" type="video/mp4"></video>
+            </div>
+            <div class="video-meta">
+              <h4>Elastic object</h4>
+              <p>Apple, bear, shoe, or toy. Prefer one that clearly shows deformation and rebound.</p>
+              <div class="tag-row"><span class="tag">teaser</span><span class="tag">elastic</span><span class="tag">deformation</span></div>
+            </div>
+          </article>
+
+          <article class="card video-card">
+            <div class="video-shell">
+              <video controls muted loop playsinline poster="assets/posters/teaser_snow.jpg"><source src="assets/videos/teaser_snow_rabbit.mp4" type="video/mp4"></video>
+            </div>
+            <div class="video-meta">
+              <h4>Plastic snow</h4>
+              <p>Rabbit or similar snow-like asset. Show irreversible deformation distinct from elastic response.</p>
+              <div class="tag-row"><span class="tag">teaser</span><span class="tag">snow</span><span class="tag">plasticity</span></div>
+            </div>
+          </article>
+
+          <article class="card video-card">
+            <div class="video-shell">
+              <video controls muted loop playsinline poster="assets/posters/teaser_sand.jpg"><source src="assets/videos/teaser_sand_dragon.mp4" type="video/mp4"></video>
+            </div>
+            <div class="video-meta">
+              <h4>Plastic sand</h4>
+              <p>Dragon or bread/sand-like sequence. Use a visibly granular collapse or flow response.</p>
+              <div class="tag-row"><span class="tag">teaser</span><span class="tag">sand</span><span class="tag">granular</span></div>
+            </div>
+          </article>
+        </div>
+
+        <h3 style="margin:42px 0 16px">2. PhysWonder-3D: unified simulation across materials</h3>
+        <div class="grid grid-2">
+          <article class="card">
+            <div class="card-body">
+              <h3>What this section should prove</h3>
+              <ul class="list">
+                <li>One simulator handles elastic, soft, plastic, and rigid materials in a unified way.</li>
+                <li>Rigid motion comes from projection onto a rigid-body manifold, not from excessively stiff elasticity.</li>
+                <li>The same pipeline supports scalable synthesis from single images and 3D assets.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-body">
+              <h3>Best video choices</h3>
+              <ul class="list">
+                <li><strong>Rigid:</strong> mug or bottle falling/sliding.</li>
+                <li><strong>Elastic:</strong> apple, ball, bear, or shoe compression/rebound.</li>
+                <li><strong>Snow:</strong> rabbit compression.</li>
+                <li><strong>Sand:</strong> dragon or bread collapse/spill.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <div class="grid grid-4" style="margin-top:20px">
+          <article class="card video-card">
+            <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/p3d_rigid.jpg"><source src="assets/videos/p3d_rigid_cluster.mp4" type="video/mp4"></video></div>
+            <div class="video-meta"><h4>Rigid projection</h4><p>Use a sequence with contact or bending challenge to emphasize stability.</p></div>
+          </article>
+          <article class="card video-card">
+            <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/p3d_elastic.jpg"><source src="assets/videos/p3d_elastic_sequence.mp4" type="video/mp4"></video></div>
+            <div class="video-meta"><h4>Elastic / soft</h4><p>Choose the clearest visible strain and recovery.</p></div>
+          </article>
+          <article class="card video-card">
+            <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/p3d_snow.jpg"><source src="assets/videos/p3d_snow_sequence.mp4" type="video/mp4"></video></div>
+            <div class="video-meta"><h4>Plastic snow</h4><p>Prefer one showing yield and accumulation of permanent change.</p></div>
+          </article>
+          <article class="card video-card">
+            <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/p3d_sand.jpg"><source src="assets/videos/p3d_sand_sequence.mp4" type="video/mp4"></video></div>
+            <div class="video-meta"><h4>Plastic sand</h4><p>Choose an easily readable collapse or spreading motion.</p></div>
+          </article>
+        </div>
+
+        <h3 style="margin:42px 0 16px">3. Deformation-gradient visualization: this is the key representation</h3>
+        <div class="twocol">
+          <article class="card">
+            <div class="card-body">
+              <h3>How to present it</h3>
+              <p>
+                Make this a paired view. Left column: RGB simulation videos. Right column: deformation-gradient maps with the same timing. This section should visually teach why deformation gradients are richer than trajectories or sparse controls.
+              </p>
+              <ul class="list">
+                <li>Rigid should show relatively weak gradients.</li>
+                <li>Elastic should show localized, recoverable high responses.</li>
+                <li>Snow and sand should show more persistent non-rigid responses.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="card">
+            <div class="video-shell">
+              <video controls muted loop playsinline poster="assets/posters/gradients_showcase.jpg">
+                <source src="assets/videos/gradient_showcase_grid.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="figcap">
+              Recommended format: one 2×2 synchronized video grid, each cell showing simulation above and deformation-gradient map below.
+            </div>
+          </article>
+        </div>
+
+        <h3 style="margin:42px 0 16px">4. PhysWonder-Ctrl: physically controllable generation</h3>
+        <div class="grid grid-4">
+          <article class="card video-card">
+            <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/ctrl_ref.jpg"><source src="assets/videos/ctrl_reference_input.mp4" type="video/mp4"></video></div>
+            <div class="video-meta"><h4>Reference input</h4><p>Optional short clip or static-image animation panel explaining the initial condition.</p></div>
+          </article>
+          <article class="card video-card">
+            <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/ctrl_gt.jpg"><source src="assets/videos/ctrl_gt_deformation.mp4" type="video/mp4"></video></div>
+            <div class="video-meta"><h4>GT deformation control</h4><p>Only for training/explanation. Helps users understand what is internalized.</p></div>
+          </article>
+          <article class="card video-card">
+            <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/ctrl_pred.jpg"><source src="assets/videos/ctrl_predicted_latent_result.mp4" type="video/mp4"></video></div>
+            <div class="video-meta"><h4>Predicted latent control</h4><p>Main result to emphasize: no explicit control video required at inference.</p></div>
+          </article>
+          <article class="card video-card">
+            <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/ctrl_final.jpg"><source src="assets/videos/ctrl_final_generation.mp4" type="video/mp4"></video></div>
+            <div class="video-meta"><h4>Final generation</h4><p>Put your strongest qualitative result here, ideally with clear physical parameter change.</p></div>
+          </article>
+        </div>
+
+        <h3 style="margin:42px 0 16px">5. Comparison strip: ablations and baselines</h3>
+        <article class="card">
+          <div class="card-body">
+            <p class="muted">A Force Prompting–style comparison strip works very well here. Each column below is already laid out for a single comparable clip using the same initial image.</p>
+            <div class="comparison-grid" style="margin-top:12px">
+              <div class="comparison-item">
+                <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/cmp_prompt_only.jpg"><source src="assets/videos/cmp_prompt_only.mp4" type="video/mp4"></video></div>
+                <h5>Prompt only</h5>
+                <p>Show failure to capture constitutive dynamics.</p>
+              </div>
+              <div class="comparison-item">
+                <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/cmp_flow.jpg"><source src="assets/videos/cmp_gt_flow.mp4" type="video/mp4"></video></div>
+                <h5>GT flow control</h5>
+                <p>Useful to contrast with deformation-aware control.</p>
+              </div>
+              <div class="comparison-item">
+                <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/cmp_traj.jpg"><source src="assets/videos/cmp_gt_trajectory.mp4" type="video/mp4"></video></div>
+                <h5>GT trajectory control</h5>
+                <p>Shows why trajectories are less expressive.</p>
+              </div>
+              <div class="comparison-item">
+                <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/cmp_pred.jpg"><source src="assets/videos/cmp_latent_predictor.mp4" type="video/mp4"></video></div>
+                <h5>Latent predictor</h5>
+                <p>Main inference-time setting.</p>
+              </div>
+              <div class="comparison-item">
+                <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/cmp_gt_deform.jpg"><source src="assets/videos/cmp_gt_deformation.mp4" type="video/mp4"></video></div>
+                <h5>GT deformation</h5>
+                <p>Optional oracle reference next to the final method.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <h3 style="margin:42px 0 16px">6. Real-world generalization</h3>
+        <div class="grid grid-2">
+          <article class="card video-card">
+            <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/aist_input.jpg"><source src="assets/videos/aist_reference_or_control.mp4" type="video/mp4"></video></div>
+            <div class="video-meta"><h4>AIST++ condition / reference</h4><p>Use one concise example that shows transfer beyond synthetic constitutive scenes.</p></div>
+          </article>
+          <article class="card video-card">
+            <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/aist_output.jpg"><source src="assets/videos/aist_generalization_output.mp4" type="video/mp4"></video></div>
+            <div class="video-meta"><h4>Generalized output</h4><p>Show that the latent predictor also helps other control-video generation tasks.</p></div>
+          </article>
+        </div>
+
+        <h3 style="margin:42px 0 16px">7. Exploratory 2D validation and stability</h3>
+        <div class="grid grid-2">
+          <article class="card">
+            <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/exp2d_efficiency.jpg"><source src="assets/videos/exploratory_2d_efficiency.mp4" type="video/mp4"></video></div>
+            <div class="figcap">Use one grid video for efficiency comparisons across elastic and sand cases.</div>
+          </article>
+          <article class="card">
+            <div class="video-shell"><video controls muted loop playsinline poster="assets/posters/exp2d_rigid.jpg"><source src="assets/videos/exploratory_2d_rigid_stability.mp4" type="video/mp4"></video></div>
+            <div class="figcap">Use one grid video for rigid-bar / pillar contact and isometry-error comparisons.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Practical Notes</div>
+            <h2>How to prepare your assets</h2>
+          </div>
+        </div>
+        <div class="grid grid-3">
+          <article class="card"><div class="card-body">
+            <h3>Video lengths</h3>
+            <p>Keep gallery clips short: 3–8 seconds, muted, looping. Use one stronger teaser around 8–12 seconds at the top.</p>
+          </div></article>
+          <article class="card"><div class="card-body">
+            <h3>Poster frames</h3>
+            <p>Use crisp poster images for every video so the page still reads well before playback. Especially important for side-by-side comparisons.</p>
+          </div></article>
+          <article class="card"><div class="card-body">
+            <h3>Compression</h3>
+            <p>Convert clips to H.264 MP4 and keep each file lightweight. A project page feels much better when each tile loads quickly.</p>
+          </div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section id="bibtex" class="section section-tight">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Citation</div>
+            <h2>BibTeX</h2>
+          </div>
+        </div>
+        <article class="card">
+          <div class="card-body">
+<pre style="white-space:pre-wrap;margin:0;color:#dfe6ff;font-size:14px;line-height:1.65">@article{physwonder2026,
+  title   = {PhysWonder: Physically Controllable Video Generation via Internalized Simulation-Coupled Constitutive Representation},
+  author  = {Anonymous Author(s)},
+  journal = {SIGGRAPH Asia 2026 Submission},
+  year    = {2026}
+}</pre>
+          </div>
+        </article>
+      </div>
+    </section> -->
+  </main>
+
+  <div class="predictor-modal" id="predictor-modal" aria-hidden="true">
+    <div class="predictor-panel" role="dialog" aria-modal="true" aria-labelledby="predictor-title">
+      <div class="predictor-header">
+        <div class="predictor-title">
+          <div class="eyebrow">Predictor Detail</div>
+          <h3 id="predictor-title">PhysWonder-Ctrl Predictor</h3>
+          <p>This focused view highlights the latent predictor branch responsible for turning simulation-coupled constitutive signals into controllable generation guidance. It is presented as an in-page detail card so readers can inspect the module without breaking reading flow.</p>
+          <div class="predictor-chips">
+            <span class="predictor-chip">Latent control branch</span>
+            <span class="predictor-chip">Detailed network view</span>
+            <span class="predictor-chip">Simulation-coupled supervision</span>
+          </div>
+        </div>
+        <button class="predictor-close" type="button" aria-label="Close predictor detail" data-modal-close="predictor-modal">×</button>
+      </div>
+      <div class="predictor-body">
+        <div class="predictor-frame">
+          <div class="figure-viewer">
+            <img class="figure-image" src="assets/figures/PhysWonder-Ctrl_Predictor.png" alt="PhysWonder-Ctrl predictor detail">
+          </div>
+        </div>
+        <div class="figcap-actions" style="margin-top:16px">
+          <a class="figure-link" href="assets/figures/PhysWonder-Ctrl_Predictor.png" target="_blank" rel="noopener noreferrer">Open image</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="small">
+        <!-- This page is a single-file project page template. Put the file at <span class="code">index.html</span> in your GitHub Pages repository, then add your media under <span class="code">assets/videos</span>, <span class="code">assets/posters</span>, and <span class="code">assets/figures</span>. -->
+         PhysWonder: Physically Controllable Video Generation via Internalized Simulation-Coupled Constitutive Representation
+      </p>
+    </div>
+  </footer>
+  <script>
+    (() => {
+      const openers = document.querySelectorAll('[data-modal-open]');
+      const closers = document.querySelectorAll('[data-modal-close]');
+
+      closers.forEach((button) => {
+        button.textContent = 'X';
+      });
+
+      const openModal = (id) => {
+        const modal = document.getElementById(id);
+        if (!modal) return;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeModal = (id) => {
+        const modal = document.getElementById(id);
+        if (!modal) return;
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+
+      openers.forEach((button) => {
+        button.addEventListener('click', () => openModal(button.dataset.modalOpen));
+      });
+
+      closers.forEach((button) => {
+        button.addEventListener('click', () => closeModal(button.dataset.modalClose));
+      });
+
+      document.addEventListener('click', (event) => {
+        const modal = event.target.closest('.predictor-modal');
+        if (modal && event.target === modal) {
+          closeModal(modal.id);
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          document.querySelectorAll('.predictor-modal.is-open').forEach((modal) => closeModal(modal.id));
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
