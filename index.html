@@ -15,6 +15,8 @@
       --muted:#5f6673;
       --line:rgba(17,17,17,0.10);
       --accent:#0a84ff;
+      --accent-soft:#d9ebff;
+      --accent-strong:#005ecb;
       --accent-2:#111111;
       --shadow:0 18px 40px rgba(15,23,42,.06);
       --radius:22px;
@@ -85,19 +87,238 @@
     .hero-figure .figcap{
       text-align:left;
     }
+    .interactive-teaser{
+      position:relative;
+    }
+    .interactive-teaser::after{
+      content:"";
+      position:absolute;
+      inset:auto 0 0;
+      height:24%;
+      background:linear-gradient(180deg, transparent, rgba(255,255,255,.78));
+      pointer-events:none;
+    }
+    .teaser-hotspot-layer{
+      position:absolute;
+      inset:0;
+      pointer-events:auto;
+      z-index:3;
+    }
+    .teaser-hotspot{
+      --ring:rgba(10,132,255,.34);
+      position:absolute;
+      pointer-events:auto;
+      z-index:4;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px 10px 10px;
+      border:1px solid rgba(255,255,255,.72);
+      border-radius:999px;
+      background:rgba(255,255,255,.86);
+      color:#122033;
+      box-shadow:0 16px 30px rgba(15,23,42,.14);
+      cursor:pointer;
+      transition:transform .22s ease, box-shadow .22s ease, background .22s ease, border-color .22s ease;
+      backdrop-filter:blur(10px);
+    }
+    .teaser-hotspot::before{
+      content:"";
+      width:14px;
+      height:14px;
+      border-radius:999px;
+      background:var(--accent);
+      box-shadow:0 0 0 0 var(--ring);
+      animation:teaserPulse 2s infinite;
+      flex:0 0 auto;
+    }
+    .teaser-hotspot::after{
+      content:"";
+      position:absolute;
+      inset:-8px;
+      border-radius:999px;
+      border:1px solid rgba(10,132,255,.14);
+      opacity:0;
+      transition:opacity .22s ease;
+    }
+    .teaser-hotspot:hover{
+      transform:translateY(-2px) scale(1.01);
+      background:#fff;
+      border-color:rgba(10,132,255,.22);
+      box-shadow:0 22px 40px rgba(15,23,42,.18);
+    }
+    .teaser-hotspot:hover::after,
+    .teaser-hotspot:focus-visible::after{
+      opacity:1;
+    }
+    .teaser-hotspot:focus-visible{
+      outline:none;
+      box-shadow:0 0 0 4px rgba(10,132,255,.16), 0 18px 34px rgba(15,23,42,.18);
+    }
+    .teaser-hotspot[data-object="rabbit"]{left:6.5%;top:34%}
+    .teaser-hotspot[data-object="mug"]{left:21.5%;top:20.5%}
+    .teaser-hotspot[data-object="bear"]{left:45.5%;top:11.5%}
+    .teaser-hotspot-label{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      line-height:1.1;
+      text-align:left;
+    }
+    .teaser-hotspot-label strong{
+      font-size:13px;
+    }
+    .teaser-hotspot-label span{
+      font-size:11px;
+      color:#5f6673;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+    .teaser-inline-hint{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
+      font-size:13px;
+      color:#667080;
+    }
+    .teaser-inline-hint strong{
+      color:#152033;
+    }
+    @keyframes teaserPulse{
+      0%{box-shadow:0 0 0 0 rgba(10,132,255,.34)}
+      70%{box-shadow:0 0 0 12px rgba(10,132,255,0)}
+      100%{box-shadow:0 0 0 0 rgba(10,132,255,0)}
+    }
     .author-line{color:#3f4652;font-size:17px}
     .affil-line{color:var(--muted);font-size:15px}
-    .button-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
-    .btn{
-      display:inline-flex;align-items:center;gap:10px;
-      border:1px solid rgba(17,17,17,.10);border-radius:999px;padding:12px 18px;
-      background:rgba(255,255,255,.88);transition:.2s transform ease,.2s background ease,.2s box-shadow ease
+    .button-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:10px;
+      width:min(980px, 100%);
     }
-    .btn:hover{transform:translateY(-1px);background:#fff;box-shadow:0 8px 24px rgba(15,23,42,.08)}
+    .btn{
+      --spot-x:50%;
+      --spot-y:50%;
+      position:relative;
+      isolation:isolate;
+      display:inline-flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      min-width:170px;
+      padding:14px 18px;
+      border:1px solid rgba(17,17,17,.10);
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(247,248,251,.92));
+      box-shadow:0 12px 28px rgba(15,23,42,.06);
+      overflow:hidden;
+      transition:border-color .22s ease, transform .22s ease, background .22s ease, box-shadow .22s ease, color .22s ease;
+    }
+    .btn::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:radial-gradient(circle at var(--spot-x) var(--spot-y), rgba(10,132,255,.18), transparent 34%);
+      opacity:0;
+      transition:opacity .22s ease;
+      z-index:-1;
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+      background:#fff;
+      border-color:rgba(10,132,255,.22);
+      box-shadow:0 18px 34px rgba(15,23,42,.10);
+    }
+    .btn:hover::before,
+    .btn.is-active::before,
+    .detail-trigger:hover::before,
+    .figure-link:hover::before,
+    .predictor-close:hover::before{
+      opacity:1;
+    }
+    .btn:active,
+    .detail-trigger:active,
+    .figure-link:active,
+    .predictor-close:active{
+      transform:translateY(0) scale(.985);
+    }
+    .btn:focus-visible,
+    .detail-trigger:focus-visible,
+    .figure-link:focus-visible,
+    .predictor-close:focus-visible{
+      outline:none;
+      box-shadow:0 0 0 4px rgba(10,132,255,.18), 0 16px 34px rgba(15,23,42,.10);
+    }
+    .btn-copy{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:2px;
+      text-align:left;
+      line-height:1.15;
+    }
+    .btn-kicker{
+      font-size:11px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#707887;
+    }
+    .btn-label{
+      font-size:15px;
+      font-weight:700;
+      color:#151922;
+    }
+    .btn-arrow{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:32px;
+      height:32px;
+      border-radius:999px;
+      border:1px solid rgba(17,17,17,.08);
+      background:rgba(255,255,255,.78);
+      color:#1d2430;
+      font-size:14px;
+      font-weight:700;
+      flex:0 0 auto;
+      transition:transform .22s ease, background .22s ease, border-color .22s ease;
+    }
+    .btn:hover .btn-arrow,
+    .btn.is-active .btn-arrow{
+      transform:translateX(2px);
+      background:rgba(10,132,255,.10);
+      border-color:rgba(10,132,255,.16);
+    }
+    .btn.is-active{
+      color:var(--accent-strong);
+      border-color:rgba(10,132,255,.25);
+      background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(232,242,255,.95));
+      box-shadow:0 18px 36px rgba(10,132,255,.12);
+    }
     .btn.primary{
-      background:#111;
+      border-color:#111;
+      background:linear-gradient(135deg, #111 0%, #1f2937 100%);
       color:#fff;
-      box-shadow:0 10px 28px rgba(17,17,17,.14);
+      box-shadow:0 16px 34px rgba(17,17,17,.18);
+    }
+    .btn.primary .btn-kicker,
+    .btn.primary .btn-label{
+      color:#fff;
+    }
+    .btn.primary .btn-arrow{
+      background:rgba(255,255,255,.12);
+      border-color:rgba(255,255,255,.14);
+      color:#fff;
+    }
+    .btn.primary:hover{
+      border-color:#111;
+      box-shadow:0 20px 38px rgba(17,17,17,.24);
     }
     .hero-media{
       margin-top:30px;
@@ -173,16 +394,39 @@
       display:none;
     }
     .detail-trigger{
+      --spot-x:50%;
+      --spot-y:50%;
+      position:relative;
       padding:10px 14px;
       font-size:13px;
       font-weight:700;
       cursor:pointer;
-      transition:.2s transform ease,.2s background ease,.2s box-shadow ease;
+      overflow:hidden;
+      transition:.2s transform ease,.2s background ease,.2s box-shadow ease,.2s border-color ease;
       box-shadow:0 10px 24px rgba(15,23,42,.08);
     }
+    .detail-trigger::before,
+    .figure-link::before,
+    .predictor-close::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:radial-gradient(circle at var(--spot-x) var(--spot-y), rgba(10,132,255,.16), transparent 36%);
+      opacity:0;
+      transition:opacity .22s ease;
+      z-index:0;
+    }
+    .detail-trigger > *,
+    .figure-link > *,
+    .predictor-close > *{
+      position:relative;
+      z-index:1;
+    }
     .detail-trigger:hover{
-      transform:translateY(-1px);
+      transform:translateY(-2px);
       background:#fff;
+      border-color:rgba(10,132,255,.22);
+      box-shadow:0 14px 30px rgba(15,23,42,.12);
     }
     .figcap{
       padding:14px 16px 16px;color:var(--muted);font-size:16px;line-height:1.55;border-top:1px solid rgba(17,17,17,.06)
@@ -254,11 +498,21 @@
     .figure-link{
       display:inline-flex;
       align-items:center;
+      position:relative;
+      overflow:hidden;
+      gap:8px;
       border:1px solid var(--line);
       border-radius:999px;
-      padding:8px 12px;
+      padding:10px 14px;
       background:#fff;
       font-size:13px;
+      font-weight:700;
+      transition:.2s transform ease,.2s border-color ease,.2s box-shadow ease;
+    }
+    .figure-link:hover{
+      transform:translateY(-2px);
+      border-color:rgba(10,132,255,.22);
+      box-shadow:0 12px 24px rgba(15,23,42,.10);
     }
     .mini-figures{
       margin-top:28px;
@@ -342,6 +596,10 @@
       background:rgba(255,255,255,.10);
     }
     .predictor-close{
+      --spot-x:50%;
+      --spot-y:50%;
+      position:relative;
+      overflow:hidden;
       width:42px;
       height:42px;
       border:1px solid rgba(17,17,17,.08);
@@ -352,6 +610,17 @@
       line-height:1;
       cursor:pointer;
       flex:0 0 auto;
+      transition:.2s transform ease,.2s border-color ease,.2s box-shadow ease;
+    }
+    .predictor-close:hover{
+      transform:translateY(-2px);
+      border-color:rgba(10,132,255,.22);
+      box-shadow:0 12px 24px rgba(15,23,42,.10);
+    }
+    .hero-actions-note{
+      margin-top:6px;
+      color:#6a7280;
+      font-size:13px;
     }
     .predictor-body{
       padding:20px 24px 24px;
@@ -365,6 +634,106 @@
     .predictor-frame .figure-viewer{
       aspect-ratio:16/10;
       background:transparent;
+    }
+    .interactive-teaser-panel{
+      width:min(1320px, 100%);
+    }
+    .interactive-teaser-body{
+      padding:20px 24px 24px;
+    }
+    .teaser-modal-grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 1fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .teaser-modal-card{
+      border:1px solid rgba(17,17,17,.08);
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(247,248,250,.94));
+      overflow:hidden;
+      box-shadow:0 18px 34px rgba(15,23,42,.08);
+    }
+    .teaser-modal-card .card-body{
+      padding:16px 18px 18px;
+    }
+    .teaser-modal-card h4{
+      margin:0 0 6px;
+      font-size:18px;
+    }
+    .teaser-modal-card p{
+      margin:0;
+      font-size:14px;
+    }
+    .teaser-viewport{
+      position:relative;
+      aspect-ratio:1/1;
+      min-height:320px;
+      background:
+        radial-gradient(circle at top, rgba(10,132,255,.16), transparent 34%),
+        linear-gradient(180deg, #fbfcff 0%, #edf3fb 100%);
+    }
+    .teaser-viewport canvas{
+      width:100%;
+      height:100%;
+      display:block;
+      cursor:grab;
+    }
+    .teaser-viewport canvas.is-dragging{
+      cursor:grabbing;
+    }
+    .teaser-viewport-status{
+      position:absolute;
+      left:16px;
+      right:16px;
+      bottom:16px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      pointer-events:none;
+    }
+    .teaser-status-pill{
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(17,17,17,.08);
+      color:#334154;
+      font-size:12px;
+      font-weight:700;
+      backdrop-filter:blur(8px);
+    }
+    .teaser-modal-video{
+      aspect-ratio:1/1;
+      min-height:320px;
+      background:#eef1f5;
+      border-bottom:1px solid rgba(17,17,17,.08);
+      position:relative;
+    }
+    .teaser-modal-video img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      background:#eef1f5;
+      display:block;
+    }
+    .media-fallback{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      text-align:center;
+      color:#536276;
+      font-size:14px;
+      line-height:1.5;
+      background:
+        radial-gradient(circle at top, rgba(10,132,255,.12), transparent 34%),
+        linear-gradient(180deg, #fbfcff 0%, #edf3fb 100%);
+    }
+    .media-fallback.is-hidden{
+      display:none;
     }
     .section-head{
       display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:28px
@@ -417,7 +786,7 @@
     @media (max-width: 1100px){
       .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
       .comparison-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-      .hero-media,.twocol,.grid-3,.grid-2{grid-template-columns:1fr}
+      .hero-media,.twocol,.grid-3,.grid-2,.teaser-modal-grid{grid-template-columns:1fr}
     }
     @media (max-width: 760px){
       .section{padding:56px 0}
@@ -425,8 +794,40 @@
       .container{width:min(var(--max), calc(100% - 20px))}
       .card-body{padding:18px}
       .video-meta{padding:14px 16px 16px}
+      .button-row{
+        gap:10px;
+      }
+      .btn{
+        min-width:calc(50% - 6px);
+        flex:1 1 calc(50% - 6px);
+        padding:13px 16px;
+      }
       .figure-overlay{
         inset:56% auto auto 66%;
+      }
+      .teaser-hotspot{
+        padding:8px 11px 8px 8px;
+      }
+      .teaser-hotspot-label strong{
+        font-size:12px;
+      }
+      .teaser-hotspot-label span{
+        font-size:10px;
+      }
+      .teaser-hotspot[data-object="rabbit"]{left:4%;top:40%}
+      .teaser-hotspot[data-object="mug"]{left:16%;top:24%}
+      .teaser-hotspot[data-object="bear"]{left:40%;top:14%}
+    }
+    @media (max-width: 520px){
+      .btn{
+        min-width:100%;
+        flex-basis:100%;
+      }
+      .teaser-hotspot{
+        gap:8px;
+      }
+      .teaser-hotspot-label span{
+        display:none;
       }
     }
   </style>
@@ -440,20 +841,69 @@
         <p class="author-line">Anonymous Author(s)</p>
         
         <div class="button-row">
-          <a class="btn primary" href="#videos">Demo Videos</a>
-          <a class="btn" href="#framework">Framework</a>
-          <a class="btn" href="#abstract">Abstract</a>
-          <a class="btn" href="#framework">Key Figures</a>
+          <a class="btn primary" href="#videos">
+            <span class="btn-copy">
+              <span class="btn-kicker">Jump to</span>
+              <span class="btn-label">Demo Videos</span>
+            </span>
+            <span class="btn-arrow">-&gt;</span>
+          </a>
+          <a class="btn" href="#framework">
+            <span class="btn-copy">
+              <span class="btn-kicker">Method</span>
+              <span class="btn-label">Framework</span>
+            </span>
+            <span class="btn-arrow">-&gt;</span>
+          </a>
+          <a class="btn" href="#abstract">
+            <span class="btn-copy">
+              <span class="btn-kicker">Overview</span>
+              <span class="btn-label">Abstract</span>
+            </span>
+            <span class="btn-arrow">-&gt;</span>
+          </a>
+          <a class="btn" href="#framework">
+            <span class="btn-copy">
+              <span class="btn-kicker">Figures</span>
+              <span class="btn-label">Key Figures</span>
+            </span>
+            <span class="btn-arrow">-&gt;</span>
+          </a>
           <!-- <a class="btn" href="#bibtex">BibTeX</a> -->
         </div>
+        <div class="hero-actions-note">Interactive elements now surface stronger hover, focus, and active feedback to guide first-time visitors.</div>
 
         <figure class="card figure-card hero-figure">
-          <div class="figure-viewer">
+          <div class="figure-viewer interactive-teaser">
             <img class="figure-image" src="assets/figures/Teaser.png" alt="PhysWonder teaser figure">
+            <div class="teaser-hotspot-layer" aria-label="Interactive teaser objects">
+              <button class="teaser-hotspot" type="button" data-modal-open="interactive-teaser-modal" data-object="rabbit" data-object-label="Rabbit">
+                <span class="teaser-hotspot-label">
+                  <span>Perception</span>
+                  <strong>Rabbit</strong>
+                </span>
+              </button>
+              <button class="teaser-hotspot" type="button" data-modal-open="interactive-teaser-modal" data-object="mug" data-object-label="Mug">
+                <span class="teaser-hotspot-label">
+                  <span>Perception</span>
+                  <strong>Mug</strong>
+                </span>
+              </button>
+              <button class="teaser-hotspot" type="button" data-modal-open="interactive-teaser-modal" data-object="bear" data-object-label="Bear">
+                <span class="teaser-hotspot-label">
+                  <span>Perception</span>
+                  <strong>Bear</strong>
+                </span>
+              </button>
+            </div>
           </div>
           <figcaption class="figcap">
             <div class="framework-copy">
-              <strong>Teaser.</strong> A single overview visual placed immediately under the title, so visitors understand the paper at a glance before scrolling into demos and framework details.
+              <strong>Interactive Teaser.</strong> Three foreground objects in the teaser are now clickable. In the current draft, the <strong>mug</strong> hotspot is the one explicitly bound to the <span class="code">orange</span> placeholder asset pack, opening a tri-panel detail view with a rotatable 3D object preview, the generated output video, and the deformation video.
+            </div>
+            <div class="teaser-inline-hint">
+              <strong>Try clicking the mug first.</strong>
+              <span>The current visible placeholder binding is <span class="code">mug -> assets/posters/orange</span>.</span>
             </div>
           </figcaption>
         </figure>
@@ -604,7 +1054,7 @@
               <img class="figure-image" src="assets/figures/PhysWonder-Ctrl_Pipeline_v2.png" alt="PhysWonder-Ctrl framework figure">
               <div class="figure-annotation">Stage 2</div>
               <div class="figure-overlay">
-                <button class="detail-trigger" type="button" data-modal-open="predictor-modal">Inspect Control Latent Predictor Framework</button>
+                <button class="detail-trigger" type="button" data-modal-open="predictor-modal">🔎 Control Latent Predictor Framework</button>
               </div>
             </div>
             <figcaption class="figcap">
@@ -647,14 +1097,14 @@
               <img class="figure-image" src="assets/figures/PhysWonder-Ctrl_Pipeline_v2.png" alt="PhysWonder-Ctrl framework figure">
               <div class="figure-overlay">
                 <span class="figure-badge">Main generator + latent predictor + train / inference split</span>
-                <button class="detail-trigger" type="button" data-modal-open="predictor-modal">Inspect Predictor</button>
+                <button class="detail-trigger" type="button" data-modal-open="predictor-modal">Inspect Predictor -&gt;</button>
               </div>
             </div>
             <figcaption class="figcap">
               <strong>Figure slot B — PhysWonder-Ctrl.</strong> Keep this equally large. It should show the dual-branch setup: main generator branch, control latent predictor branch, and training/inference split.
             </figcaption>
             <div class="figcap-actions" style="padding:0 18px 16px">
-              <button class="figure-link" type="button" data-modal-open="predictor-modal">View Predictor Detail</button>
+              <button class="figure-link" type="button" data-modal-open="predictor-modal">View Predictor Detail -&gt;</button>
             </div>
           </figure>
         </div>
@@ -917,8 +1367,59 @@
             <img class="figure-image" src="assets/figures/PhysWonder-Ctrl_Predictor.png" alt="PhysWonder-Ctrl predictor detail">
           </div>
         </div>
-        <div class="figcap-actions" style="margin-top:16px">
-          <a class="figure-link" href="assets/figures/PhysWonder-Ctrl_Predictor.png" target="_blank" rel="noopener noreferrer">Open image</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="predictor-modal" id="interactive-teaser-modal" aria-hidden="true">
+    <div class="predictor-panel interactive-teaser-panel" role="dialog" aria-modal="true" aria-labelledby="interactive-teaser-title">
+      <div class="predictor-header">
+        <div class="predictor-title">
+          <div class="eyebrow">Interactive Teaser</div>
+          <h3 id="interactive-teaser-title">Interactive Teaser - Mug</h3>
+          <p id="interactive-teaser-description">This object-level view combines a mouse-draggable 3D preview with the corresponding output and deformation videos.</p>
+          <div class="predictor-chips">
+            <span class="predictor-chip" id="interactive-teaser-chip">Object: Mug</span>
+            <span class="predictor-chip">OBJ + video triplet</span>
+            <span class="predictor-chip">Interactive preview</span>
+          </div>
+        </div>
+        <button class="predictor-close" type="button" aria-label="Close interactive teaser detail" data-modal-close="interactive-teaser-modal">×</button>
+      </div>
+      <div class="interactive-teaser-body">
+        <div class="teaser-modal-grid">
+          <article class="teaser-modal-card">
+            <div class="teaser-viewport" id="teaser-viewport">
+              <div class="teaser-viewport-status">
+                <span class="teaser-status-pill">Drag to orbit</span>
+                <span class="teaser-status-pill">Wheel to zoom</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <h4>3D Object View</h4>
+              <p>Interactive OBJ preview loaded from the local teaser asset folder.</p>
+            </div>
+          </article>
+
+          <article class="teaser-modal-card">
+            <div class="teaser-modal-video">
+              <img id="interactive-output-image" src="assets/teaser/orange/output_video.webp" alt="Output animation preview">
+            </div>
+            <div class="card-body">
+              <h4>Output Video</h4>
+              <p>Generated motion result associated with the selected teaser object.</p>
+            </div>
+          </article>
+
+          <article class="teaser-modal-card">
+            <div class="teaser-modal-video">
+              <img id="interactive-deformation-image" src="assets/teaser/orange/deformation.webp" alt="Deformation animation preview">
+            </div>
+            <div class="card-body">
+              <h4>Deformation</h4>
+              <p>Deformation-space visualization shown alongside the output for quick comparison.</p>
+            </div>
+          </article>
         </div>
       </div>
     </div>
@@ -932,14 +1433,229 @@
       </p>
     </div>
   </footer>
+  <script src="assets/vendor/three/three.min.js"></script>
+  <script src="assets/vendor/three/OBJLoader.js"></script>
+  <script src="assets/teaser/orange/object1.inline.js"></script>
   <script>
     (() => {
       const openers = document.querySelectorAll('[data-modal-open]');
       const closers = document.querySelectorAll('[data-modal-close]');
+      const navButtons = Array.from(document.querySelectorAll('.button-row .btn[href^="#"]'));
+      const sections = navButtons
+        .map((button) => document.querySelector(button.getAttribute('href')))
+        .filter(Boolean);
+      const interactiveElements = document.querySelectorAll('.btn, .detail-trigger, .figure-link, .predictor-close');
+      const teaserHotspots = document.querySelectorAll('.teaser-hotspot');
+      const teaserTitle = document.getElementById('interactive-teaser-title');
+      const teaserChip = document.getElementById('interactive-teaser-chip');
+      const teaserViewport = document.getElementById('teaser-viewport');
+      let teaserViewerState = null;
+      let activeTeaserObject = 'Mug';
 
       closers.forEach((button) => {
         button.textContent = 'X';
       });
+
+      interactiveElements.forEach((element) => {
+        element.addEventListener('pointermove', (event) => {
+          const rect = element.getBoundingClientRect();
+          element.style.setProperty('--spot-x', `${event.clientX - rect.left}px`);
+          element.style.setProperty('--spot-y', `${event.clientY - rect.top}px`);
+        });
+      });
+
+      const syncActiveNav = () => {
+        if (!sections.length) return;
+        let current = sections[0];
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= window.innerHeight * 0.28) {
+            current = section;
+          }
+        });
+
+        navButtons.forEach((button) => {
+          const isCurrent = button.getAttribute('href') === `#${current.id}`;
+          button.classList.toggle('is-active', isCurrent);
+          if (isCurrent) {
+            button.setAttribute('aria-current', 'true');
+          } else {
+            button.removeAttribute('aria-current');
+          }
+        });
+      };
+
+      const updateInteractiveTeaserMeta = (objectLabel) => {
+        activeTeaserObject = objectLabel || 'Object';
+        if (teaserTitle) {
+          teaserTitle.textContent = `Interactive Teaser - ${activeTeaserObject}`;
+        }
+        if (teaserChip) {
+          teaserChip.textContent = `Object: ${activeTeaserObject}`;
+        }
+      };
+
+      const initInteractiveTeaserViewer = () => {
+        if (teaserViewerState || !teaserViewport) return;
+        if (!window.THREE || !THREE.OBJLoader) {
+          const fallback = document.createElement('div');
+          fallback.className = 'media-fallback';
+          fallback.textContent = 'Three.js failed to load, so the OBJ preview is unavailable.';
+          teaserViewport.appendChild(fallback);
+          teaserViewerState = { resizeViewer: () => {}, applyCamera: () => {} };
+          return;
+        }
+
+        const scene = new THREE.Scene();
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 1000);
+        const pivot = new THREE.Group();
+        const objectHolder = new THREE.Group();
+        const ambient = new THREE.HemisphereLight(0xffffff, 0xbfd2f0, 1.2);
+        const keyLight = new THREE.DirectionalLight(0xffffff, 1.15);
+        const rimLight = new THREE.DirectionalLight(0x9ac7ff, 0.7);
+        const ground = new THREE.Mesh(
+          new THREE.CircleGeometry(1.45, 64),
+          new THREE.MeshBasicMaterial({ color: 0xdfe9f6, transparent: true, opacity: 0.7 })
+        );
+
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        teaserViewport.appendChild(renderer.domElement);
+        renderer.domElement.setAttribute('aria-label', 'Interactive 3D teaser object');
+
+        scene.add(ambient);
+        keyLight.position.set(2.2, 3.4, 4.2);
+        rimLight.position.set(-3.2, 1.6, -2.8);
+        scene.add(keyLight, rimLight);
+
+        ground.rotation.x = -Math.PI / 2;
+        ground.position.y = -1.1;
+        scene.add(ground);
+
+        pivot.add(objectHolder);
+        scene.add(pivot);
+        camera.position.set(0, 0.35, 6.2);
+
+        const resizeViewer = () => {
+          const rect = teaserViewport.getBoundingClientRect();
+          if (!rect.width || !rect.height) return;
+          renderer.setSize(rect.width, rect.height, false);
+          camera.aspect = rect.width / rect.height;
+          camera.updateProjectionMatrix();
+        };
+
+        const loader = new THREE.OBJLoader();
+        const attachParsedObject = (obj) => {
+          let meshCount = 0;
+          obj.traverse((child) => {
+            if (child.isMesh) {
+              meshCount += 1;
+              child.material = new THREE.MeshNormalMaterial({
+                flatShading: false,
+                transparent: true,
+                opacity: 0.95
+              });
+            }
+          });
+
+          const box = new THREE.Box3().setFromObject(obj);
+          const center = box.getCenter(new THREE.Vector3());
+          const size = box.getSize(new THREE.Vector3());
+          const maxAxis = Math.max(size.x, size.y, size.z) || 1;
+
+          obj.position.sub(center);
+          obj.scale.setScalar(2.3 / maxAxis);
+          objectHolder.add(obj);
+
+          const resizedBox = new THREE.Box3().setFromObject(obj);
+          ground.position.y = resizedBox.min.y - 0.14;
+          camera.position.set(0, 0.2, Math.max(3.8, maxAxis * 2.4));
+          resizeViewer();
+        };
+
+        try {
+          if (!window.__TEASER_OBJ_BASE64) {
+            throw new Error('Inline OBJ payload is missing.');
+          }
+          const text = atob(window.__TEASER_OBJ_BASE64);
+          const sanitized = text
+            .replace(/^mtllib .*$/gm, '')
+            .replace(/^usemtl .*$/gm, '');
+          const obj = loader.parse(sanitized);
+          attachParsedObject(obj);
+        } catch (error) {
+          const fallback = document.createElement('div');
+          fallback.className = 'placeholder';
+          fallback.textContent = 'OBJ preview could not be loaded.';
+          teaserViewport.appendChild(fallback);
+        }
+
+        const controls = {
+          isDragging: false,
+          lastX: 0,
+          lastY: 0,
+          pitch: -0.18,
+          yaw: 0.52,
+          distance: 6.2
+        };
+
+        const applyCamera = () => {
+          pivot.rotation.x = controls.pitch;
+          pivot.rotation.y = controls.yaw;
+          camera.position.z = controls.distance;
+          camera.lookAt(0, 0.15, 0);
+        };
+
+        renderer.domElement.addEventListener('pointerdown', (event) => {
+          controls.isDragging = true;
+          controls.lastX = event.clientX;
+          controls.lastY = event.clientY;
+          renderer.domElement.classList.add('is-dragging');
+          renderer.domElement.setPointerCapture(event.pointerId);
+        });
+
+        renderer.domElement.addEventListener('pointermove', (event) => {
+          if (!controls.isDragging) return;
+          const deltaX = event.clientX - controls.lastX;
+          const deltaY = event.clientY - controls.lastY;
+          controls.lastX = event.clientX;
+          controls.lastY = event.clientY;
+          controls.yaw += deltaX * 0.01;
+          controls.pitch = Math.max(-1.1, Math.min(1.1, controls.pitch + deltaY * 0.008));
+          applyCamera();
+        });
+
+        const stopDragging = (event) => {
+          if (!controls.isDragging) return;
+          controls.isDragging = false;
+          renderer.domElement.classList.remove('is-dragging');
+          if (event) {
+            renderer.domElement.releasePointerCapture(event.pointerId);
+          }
+        };
+
+        renderer.domElement.addEventListener('pointerup', stopDragging);
+        renderer.domElement.addEventListener('pointerleave', stopDragging);
+        renderer.domElement.addEventListener('wheel', (event) => {
+          event.preventDefault();
+          controls.distance = Math.max(3.6, Math.min(10, controls.distance + event.deltaY * 0.004));
+          applyCamera();
+        }, { passive: false });
+
+        const animate = () => {
+          requestAnimationFrame(animate);
+          if (!controls.isDragging) {
+            controls.yaw += 0.0025;
+            applyCamera();
+          }
+          renderer.render(scene, camera);
+        };
+
+        teaserViewerState = { renderer, resizeViewer, applyCamera };
+        applyCamera();
+        resizeViewer();
+        animate();
+      };
 
       const openModal = (id) => {
         const modal = document.getElementById(id);
@@ -947,6 +1663,15 @@
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+
+        if (id === 'interactive-teaser-modal') {
+          updateInteractiveTeaserMeta(activeTeaserObject);
+          initInteractiveTeaserViewer();
+          if (teaserViewerState) {
+            teaserViewerState.resizeViewer();
+            teaserViewerState.applyCamera();
+          }
+        }
       };
 
       const closeModal = (id) => {
@@ -958,7 +1683,21 @@
       };
 
       openers.forEach((button) => {
-        button.addEventListener('click', () => openModal(button.dataset.modalOpen));
+        button.addEventListener('click', () => {
+          if (button.classList.contains('teaser-hotspot')) {
+            updateInteractiveTeaserMeta(button.dataset.objectLabel || button.dataset.object || 'Object');
+          }
+          openModal(button.dataset.modalOpen);
+        });
+      });
+
+      teaserHotspots.forEach((button) => {
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          updateInteractiveTeaserMeta(button.dataset.objectLabel || button.dataset.object || 'Object');
+          openModal('interactive-teaser-modal');
+        });
       });
 
       closers.forEach((button) => {
@@ -975,6 +1714,15 @@
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
           document.querySelectorAll('.predictor-modal.is-open').forEach((modal) => closeModal(modal.id));
+        }
+      });
+
+      syncActiveNav();
+      window.addEventListener('scroll', syncActiveNav, { passive: true });
+      window.addEventListener('resize', syncActiveNav);
+      window.addEventListener('resize', () => {
+        if (teaserViewerState) {
+          teaserViewerState.resizeViewer();
         }
       });
     })();
