@@ -87,6 +87,22 @@
     .hero-figure .figcap{
       text-align:left;
     }
+    .hero-highlight{
+      width:100%;
+      margin-top:26px;
+      text-align:left;
+    }
+    .hero-highlight .figure-viewer{
+      aspect-ratio:4959/2561;
+    }
+    .hero-highlight .figcap p{
+      margin-bottom:0;
+    }
+    .hero-highlight .predictor-chip{
+      color:#273242;
+      border-color:rgba(17,17,17,.08);
+      background:#f4f7fb;
+    }
     .interactive-teaser{
       position:relative;
     }
@@ -106,13 +122,15 @@
     }
     .teaser-hotspot{
       --ring:rgba(10,132,255,.34);
+      --label-x:28px;
+      --label-y:-50%;
       position:absolute;
       pointer-events:auto;
       z-index:4;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 14px 10px 10px;
+      width:22px;
+      height:22px;
+      display:block;
+      padding:0;
       border:1px solid rgba(255,255,255,.72);
       border-radius:999px;
       background:rgba(255,255,255,.86);
@@ -120,29 +138,33 @@
       box-shadow:0 16px 30px rgba(15,23,42,.14);
       cursor:pointer;
       transition:transform .22s ease, box-shadow .22s ease, background .22s ease, border-color .22s ease;
+      transform:translate(-50%,-50%);
       backdrop-filter:blur(10px);
     }
     .teaser-hotspot::before{
       content:"";
-      width:14px;
-      height:14px;
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:10px;
+      height:10px;
       border-radius:999px;
       background:var(--accent);
       box-shadow:0 0 0 0 var(--ring);
       animation:teaserPulse 2s infinite;
-      flex:0 0 auto;
+      transform:translate(-50%,-50%);
     }
     .teaser-hotspot::after{
       content:"";
       position:absolute;
-      inset:-8px;
+      inset:-12px;
       border-radius:999px;
       border:1px solid rgba(10,132,255,.14);
       opacity:0;
       transition:opacity .22s ease;
     }
     .teaser-hotspot:hover{
-      transform:translateY(-2px) scale(1.01);
+      transform:translate(-50%,-50%) scale(1.12);
       background:#fff;
       border-color:rgba(10,132,255,.22);
       box-shadow:0 22px 40px rgba(15,23,42,.18);
@@ -155,18 +177,38 @@
       outline:none;
       box-shadow:0 0 0 4px rgba(10,132,255,.16), 0 18px 34px rgba(15,23,42,.18);
     }
-    .teaser-hotspot[data-object="rabbit"]{left:6.5%;top:34%}
-    .teaser-hotspot[data-object="mug"]{left:21.5%;top:20.5%}
-    .teaser-hotspot[data-object="bear"]{left:45.5%;top:11.5%}
+    .teaser-hotspot[data-object="mug"]{left:39%;top:38%;--label-x:-254px;--label-y:-50%}
+    .teaser-hotspot[data-object="bear"]{left:63%;top:71%;--label-x:34px;--label-y:-50%}
+    .teaser-hotspot[data-object="duck"]{left:35%;top:72%;--label-x:-150px;--label-y:-50%}
+    .teaser-hotspot[data-object="snowman"]{left:65%;top:36%;--label-x:34px;--label-y:-50%}
     .teaser-hotspot-label{
+      position:absolute;
+      left:50%;
+      top:50%;
+      min-width:max-content;
       display:flex;
       flex-direction:column;
       align-items:flex-start;
+      gap:2px;
+      white-space:nowrap;
+      padding:8px 11px;
+      border:1px solid rgba(255,255,255,.7);
+      border-radius:999px;
+      background:rgba(255,255,255,.82);
+      box-shadow:0 12px 26px rgba(15,23,42,.12);
       line-height:1.1;
       text-align:left;
+      transform:translate(var(--label-x), var(--label-y));
+      pointer-events:auto;
+      backdrop-filter:blur(8px);
     }
     .teaser-hotspot-label strong{
       font-size:13px;
+    }
+    .teaser-hotspot[data-object="mug"] .teaser-hotspot-label{
+      align-items:flex-end;
+      text-align:right;
+      white-space:nowrap;
     }
     .teaser-hotspot-label span{
       font-size:11px;
@@ -539,7 +581,7 @@
       font-size:0;
     }
     #figures .figcap::before{
-      content:"Teaser. Start with a single uninterrupted hero figure so the method reads like a product reveal first, then a technical system.";
+      content:"PhysWonder: Scalable World Building with Internalized Constitutive Control. State-of-the-art generators often miss material-dependent dynamics, producing collapse, hallucination, rigidification, or no material response. PhysWonder-3D builds scalable engine-in-the-loop constitutive simulations and exposes deformation gradients as supervision for particle motion and material response; PhysWonder-Ctrl internalizes this representation through joint modeling.";
       font-size:14px;
       line-height:1.6;
       color:var(--muted);
@@ -547,7 +589,7 @@
       margin-bottom:12px;
     }
     .ctrl-figure .figcap::before{
-      content:"Figure B. PhysWonder-Ctrl. The control framework stays full-width, while the predictor branch gets a separate drill-down view so the main figure remains calm.";
+      content:"The Pipeline of PhysWonder-Ctrl. We propose a dual-branch joint modeling framework that leverages deformation gradients as intermediate physical representations for physically controllable video generation. See Supp. Sec. B.1 for details of the Control Latent Predictor.";
       font-size:14px;
       line-height:1.6;
       color:var(--muted);
@@ -581,6 +623,9 @@
       box-shadow:0 24px 60px rgba(15,23,42,.12);
       backdrop-filter:blur(16px);
     }
+    .highlights-panel{
+      width:min(1500px, 100%);
+    }
     .predictor-header{
       display:flex;
       align-items:flex-start;
@@ -593,6 +638,21 @@
     }
     .predictor-title h3{
       margin-bottom:8px;
+    }
+    .highlights-body{
+      padding:20px 24px 24px;
+    }
+    .highlights-frame{
+      overflow:auto;
+      border:1px solid rgba(17,17,17,.08);
+      border-radius:18px;
+      background:#fff;
+    }
+    .highlights-frame img{
+      display:block;
+      width:100%;
+      min-width:980px;
+      height:auto;
     }
     .predictor-chips{
       display:flex;
@@ -631,9 +691,33 @@
       box-shadow:0 12px 24px rgba(15,23,42,.10);
     }
     .hero-actions-note{
-      margin-top:6px;
-      color:#6a7280;
-      font-size:13px;
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin:14px 0 -2px;
+      padding:0 0 10px;
+      font-size:34px;
+      font-weight:900;
+      line-height:1.05;
+      letter-spacing:0;
+      color:transparent;
+      background:linear-gradient(90deg,#111111 0%,#0a84ff 42%,#26c47a 72%,#111111 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-align:center;
+    }
+    .hero-actions-note::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:0;
+      width:72%;
+      height:3px;
+      border-radius:999px;
+      background:linear-gradient(90deg,transparent,#0a84ff,#26c47a,transparent);
+      transform:translateX(-50%);
     }
     .predictor-body{
       padding:20px 24px 24px;
@@ -748,6 +832,67 @@
     .media-fallback.is-hidden{
       display:none;
     }
+    .perception-panel{
+      width:min(1320px, 100%);
+    }
+    .perception-body{
+      padding:20px 24px 24px;
+    }
+    .perception-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+    .perception-card{
+      display:flex;
+      flex-direction:column;
+      border:1px solid rgba(17,17,17,.08);
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(247,248,250,.94));
+      overflow:hidden;
+      box-shadow:0 18px 34px rgba(15,23,42,.08);
+    }
+    .perception-card .card-body{
+      padding:16px 18px 18px;
+    }
+    .perception-card h4{
+      margin:0 0 6px;
+      font-size:18px;
+    }
+    .perception-card p{
+      margin:0;
+      font-size:14px;
+    }
+    .perception-image-frame{
+      aspect-ratio:16/9;
+      background:#eef1f5;
+      border-bottom:1px solid rgba(17,17,17,.08);
+    }
+    .perception-image-frame img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      background:#fff;
+      display:block;
+    }
+    .perception-viewport{
+      position:relative;
+      aspect-ratio:16/9;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(38,196,122,.16), transparent 36%),
+        linear-gradient(180deg, #fbfcff 0%, #edf3fb 100%);
+      border-bottom:1px solid rgba(17,17,17,.08);
+    }
+    .perception-viewport canvas{
+      width:100%;
+      height:100%;
+      display:block;
+      cursor:grab;
+    }
+    .perception-viewport canvas.is-dragging{
+      cursor:grabbing;
+    }
     .section-head{
       display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:28px
     }
@@ -800,13 +945,15 @@
       .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
       .comparison-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
       .hero-media,.twocol,.grid-3,.grid-2,.teaser-modal-grid{grid-template-columns:1fr}
+      .perception-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
     @media (max-width: 760px){
       .section{padding:56px 0}
-      .grid-4,.comparison-grid{grid-template-columns:1fr}
+      .grid-4,.comparison-grid,.perception-grid{grid-template-columns:1fr}
       .container{width:min(var(--max), calc(100% - 20px))}
       .card-body{padding:18px}
       .video-meta{padding:14px 16px 16px}
+      .perception-body,.interactive-teaser-body{padding:16px}
       .button-row{
         gap:10px;
       }
@@ -819,7 +966,12 @@
         inset:56% auto auto 66%;
       }
       .teaser-hotspot{
-        padding:8px 11px 8px 8px;
+        width:18px;
+        height:18px;
+      }
+      .teaser-hotspot::before{
+        width:8px;
+        height:8px;
       }
       .teaser-hotspot-label strong{
         font-size:12px;
@@ -827,9 +979,10 @@
       .teaser-hotspot-label span{
         font-size:10px;
       }
-      .teaser-hotspot[data-object="rabbit"]{left:4%;top:40%}
-      .teaser-hotspot[data-object="mug"]{left:16%;top:24%}
-      .teaser-hotspot[data-object="bear"]{left:40%;top:14%}
+      .teaser-hotspot[data-object="mug"]{left:38%;top:38%;--label-x:-218px;--label-y:-50%}
+      .teaser-hotspot[data-object="bear"]{left:63%;top:71%;--label-x:25px}
+      .teaser-hotspot[data-object="duck"]{left:35%;top:72%;--label-x:-118px}
+      .teaser-hotspot[data-object="snowman"]{left:64%;top:36%;--label-x:25px}
     }
     @media (max-width: 520px){
       .btn{
@@ -837,10 +990,14 @@
         flex-basis:100%;
       }
       .teaser-hotspot{
-        gap:8px;
+        width:16px;
+        height:16px;
       }
       .teaser-hotspot-label span{
         display:none;
+      }
+      .teaser-hotspot-label{
+        padding:7px 9px;
       }
     }
   </style>
@@ -852,7 +1009,7 @@
         <div class="eyebrow">SIGGRAPH Asia 2026 Submission · Demo Page</div>
         <h1><span class="rainbow-text">PhysWonder</span>: Physically Controllable Video Generation via Internalized Simulation‑Coupled Constitutive Representation</h1>
         <p class="author-line">Anonymous Author(s)</p>
-        
+
         <div class="button-row">
           <a class="btn primary" href="#videos">
             <span class="btn-copy">
@@ -884,39 +1041,53 @@
           </a>
           <!-- <a class="btn" href="#bibtex">BibTeX</a> -->
         </div>
-        <div class="hero-actions-note">Interactive elements now surface stronger hover, focus, and active feedback to guide first-time visitors.</div>
+
+        <figure class="card figure-card hero-highlight" id="physwonder-highlights">
+          <div class="figure-viewer">
+            <img class="figure-image" src="assets/figures/physwonder-highlight.png" alt="PhysWonder highlights overview">
+          </div>
+          <figcaption class="figcap">
+            <div class="framework-copy">
+              <strong>PhysWonder: Scalable World Building with Internalized Constitutive Control.</strong> (a) State-of-the-art generators often miss material-dependent dynamics, producing collapse, hallucination, rigidification, incoherence, or no material response. (b) PhysWonder-3D builds scalable engine-in-the-loop constitutive simulations and exposes deformation gradients as supervision for particle motion and material response. (c) PhysWonder-Ctrl internalizes this representation through joint modeling, strengthening deformation-gradient control while supporting inference without explicit control videos.
+            </div>
+          </figcaption>
+        </figure>
+
+        <div class="hero-actions-note">Interactive Demo</div>
 
         <figure class="card figure-card hero-figure">
           <div class="figure-viewer interactive-teaser">
-            <img class="figure-image" src="assets/figures/Teaser.png" alt="PhysWonder teaser figure">
+            <img class="figure-image" src="assets/figures/teaser-sota.png" alt="PhysWonder teaser SOTA figure">
             <div class="teaser-hotspot-layer" aria-label="Interactive teaser objects">
-              <button class="teaser-hotspot" type="button" data-modal-open="interactive-teaser-modal" data-object="rabbit" data-object-label="Rabbit">
+              <button class="teaser-hotspot" type="button" data-modal-open="perception-modal" data-object="mug" data-object-label="Mug">
                 <span class="teaser-hotspot-label">
-                  <span>Perception</span>
-                  <strong>Rabbit</strong>
+                  <strong>Perception and World Building</strong>
                 </span>
               </button>
-              <button class="teaser-hotspot" type="button" data-modal-open="interactive-teaser-modal" data-object="mug" data-object-label="Mug">
+              <button class="teaser-hotspot" type="button" data-modal-open="interactive-teaser-modal" data-object="bear" data-object-label="Teddy Bear">
                 <span class="teaser-hotspot-label">
-                  <span>Perception</span>
-                  <strong>Mug</strong>
+                  <strong>PhysWonder-Ctrl</strong>
                 </span>
               </button>
-              <button class="teaser-hotspot" type="button" data-modal-open="interactive-teaser-modal" data-object="bear" data-object-label="Bear">
+              <button class="teaser-hotspot" type="button" data-modal-open="interactive-teaser-modal" data-object="duck" data-object-label="Rubber Duck">
                 <span class="teaser-hotspot-label">
-                  <span>Perception</span>
-                  <strong>Bear</strong>
+                  <strong>PhysWonder-3D</strong>
+                </span>
+              </button>
+              <button class="teaser-hotspot" type="button" data-modal-open="physwonder-highlights-modal" data-object="snowman" data-object-label="Snowman">
+                <span class="teaser-hotspot-label">
+                  <strong>PhysWonder Highlights</strong>
                 </span>
               </button>
             </div>
           </div>
           <figcaption class="figcap">
             <div class="framework-copy">
-              <strong>Interactive Teaser.</strong> Three foreground objects in the teaser are now clickable. In the current draft, the <strong>mug</strong> hotspot is the one explicitly bound to the <span class="code">orange</span> placeholder asset pack, opening a tri-panel detail view with a rotatable 3D object preview, the generated output video, and the deformation video.
+              <strong>PhysWonder: Scalable World Building with Internalized Constitutive Control.</strong> (a) State-of-the-art generators often miss material-dependent dynamics, producing collapse, hallucination, rigidification, incoherence, or no material response. (b) PhysWonder-3D builds scalable engine-in-the-loop constitutive simulations and exposes deformation gradients as supervision for particle motion and material response. (c) PhysWonder-Ctrl internalizes this representation through joint modeling, strengthening deformation-gradient control while supporting inference without explicit control videos.
             </div>
             <div class="teaser-inline-hint">
-              <strong>Try clicking the mug first.</strong>
-              <span>The current visible placeholder binding is <span class="code">mug -> assets/posters/orange</span>.</span>
+              <strong>Click the labels to inspect each paper component.</strong>
+              <span>Highlights open the paper overview; the other labels keep the object-level simulation preview.</span>
             </div>
           </figcaption>
         </figure>
@@ -1029,7 +1200,7 @@
               <img class="figure-image" src="assets/figures/PhysWonder-3D_Pipeline.png" alt="PhysWonder-3D framework figure">
             </div>
             <figcaption class="figcap">
-              <strong>Figure A. PhysWonder-3D.</strong> Geometry recovery, hybrid MPM simulation, constitutive sampling, rendering, and deformation-gradient generation are organized in one full pipeline.
+              <strong>PhysWonder-3D: Scalable Physically Aligned Data Synthesis.</strong> Our pipeline combines constitutive sampling guided by Vision-Language Models (VLMs) and high-fidelity physical simulation to generate physically aligned videos and deformation-gradient-based representations.
             </figcaption>
           </figure>
 
@@ -1071,7 +1242,7 @@
               </div>
             </div>
             <figcaption class="figcap">
-              <strong>Figure B. PhysWonder-Ctrl.</strong> The dual-branch control framework internalizes constitutive guidance and removes the need for explicit deformation-control videos during inference.
+              <strong>The Pipeline of PhysWonder-Ctrl.</strong> We propose a dual-branch joint modeling framework that leverages deformation gradients as intermediate physical representations for physically controllable video generation. See Supp. Sec. B.1 for details of the Control Latent Predictor.
             </figcaption>
           </figure>
 
@@ -1098,10 +1269,10 @@
         <div class="framework-stack">
           <figure class="card figure-card" id="figures">
             <div class="figure-viewer">
-              <img class="figure-image" src="assets/figures/Teaser.png" alt="PhysWonder teaser figure">
+              <img class="figure-image" src="assets/figures/teaser-sota.png" alt="PhysWonder teaser figure">
             </div>
             <figcaption class="figcap">
-              <strong>Figure slot A — PhysWonder-3D.</strong> Keep this wide. It should show the end-to-end pipeline: segmentation and geometry recovery, decomposition-based hybrid MPM, constitutive sampling, rendering, and deformation-gradient representation.
+              <strong>PhysWonder: Scalable World Building with Internalized Constitutive Control.</strong> PhysWonder-3D builds scalable engine-in-the-loop constitutive simulations and exposes deformation gradients as supervision for particle motion and material response; PhysWonder-Ctrl internalizes this representation through joint modeling, strengthening deformation-gradient control while supporting inference without explicit control videos.
             </figcaption>
           </figure>
 
@@ -1114,7 +1285,7 @@
               </div>
             </div>
             <figcaption class="figcap">
-              <strong>Figure slot B — PhysWonder-Ctrl.</strong> Keep this equally large. It should show the dual-branch setup: main generator branch, control latent predictor branch, and training/inference split.
+              <strong>The Pipeline of PhysWonder-Ctrl.</strong> We propose a dual-branch joint modeling framework that leverages deformation gradients as intermediate physical representations for physically controllable video generation. See Supp. Sec. B.1 for details of the Control Latent Predictor.
             </figcaption>
             <div class="figcap-actions" style="padding:0 18px 16px">
               <button class="figure-link" type="button" data-modal-open="predictor-modal">View Predictor Detail -&gt;</button>
@@ -1128,7 +1299,7 @@
               <img class="figure-image" src="assets/figures/PhysWonder-3D_Pipeline.png" alt="PhysWonder-3D framework figure">
             </div>
             <figcaption class="figcap">
-              <strong>Figure A - PhysWonder-3D.</strong> The full simulation pipeline is shown as one wide strip so the left-to-right process remains legible and visually calm.
+              <strong>PhysWonder-3D: Scalable Physically Aligned Data Synthesis.</strong> Our pipeline combines constitutive sampling guided by Vision-Language Models (VLMs) and high-fidelity physical simulation to generate physically aligned videos and deformation-gradient-based representations.
             </figcaption>
           </figure>
           <article class="card"><div class="card-body">
@@ -1141,7 +1312,7 @@
           </div></article>
           <article class="card"><div class="card-body">
             <h3>Asset naming</h3>
-            <p>Live assets come from <span class="code">Teaser.png</span>, <span class="code">PhysWonder-3D_Pipeline.png</span>, <span class="code">PhysWonder-Ctrl_Pipeline_v2.png</span>, and <span class="code">PhysWonder-Ctrl_Predictor.png</span>.</p>
+            <p>Live assets come from <span class="code">teaser-sota.png</span>, <span class="code">PhysWonder-3D_Pipeline.png</span>, <span class="code">PhysWonder-Ctrl_Pipeline_v2.png</span>, and <span class="code">PhysWonder-Ctrl_Predictor.png</span>.</p>
           </div></article>
         </div>
       </div>
@@ -1179,7 +1350,7 @@
               <ul class="list">
                 <li><strong>Rigid:</strong> mug or bottle falling/sliding.</li>
                 <li><strong>Elastic:</strong> apple, ball, bear, or shoe compression/rebound.</li>
-                <li><strong>Snow:</strong> rabbit compression.</li>
+                <li><strong>Snow:</strong> snowman compression.</li>
                 <li><strong>Sand:</strong> dragon or bread collapse/spill.</li>
               </ul>
             </div>
@@ -1365,7 +1536,7 @@
         <div class="predictor-title">
           <div class="eyebrow">Predictor Detail</div>
           <h3 id="predictor-title">PhysWonder-Ctrl Predictor</h3>
-          <p>This focused view highlights the latent predictor branch responsible for turning simulation-coupled constitutive signals into controllable generation guidance. It is presented as an in-page detail card so readers can inspect the module without breaking reading flow.</p>
+          <p>Detailed Architecture of the Control Latent Predictor in PhysWonder-Ctrl. The predictor fuses pooled text and image conditions, expands the reference latent into a spatiotemporal feature tensor, and predicts the control latent through stacked FiLM-conditioned 3D residual blocks.</p>
           <div class="predictor-chips">
             <span class="predictor-chip">Latent control branch</span>
             <span class="predictor-chip">Detailed network view</span>
@@ -1379,6 +1550,85 @@
           <div class="figure-viewer">
             <img class="figure-image" src="assets/figures/PhysWonder-Ctrl_Predictor.png" alt="PhysWonder-Ctrl predictor detail">
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="predictor-modal" id="perception-modal" aria-hidden="true">
+    <div class="predictor-panel perception-panel" role="dialog" aria-modal="true" aria-labelledby="perception-title">
+      <div class="predictor-header">
+        <div class="predictor-title">
+          <div class="eyebrow">Perception and World Building</div>
+          <!-- <h3 id="perception-title">Perception and World Building</h3> -->
+          <div class="predictor-chips">
+            <span class="predictor-chip">Grounding SAM</span>
+            <span class="predictor-chip">Background completion</span>
+            <span class="predictor-chip">Mesh preview</span>
+          </div>
+        </div>
+        <button class="predictor-close" type="button" aria-label="Close perception and world building" data-modal-close="perception-modal">X</button>
+      </div>
+      <div class="perception-body">
+        <div class="perception-grid">
+          <article class="perception-card">
+            <div class="perception-image-frame">
+              <img src="assets/perception/mug/display/grounding_sam_1280x720.jpg" alt="Grounding SAM result for the mug">
+            </div>
+            <div class="card-body">
+              <h4>Grounding SAM</h4>
+              <p>Open-vocabulary detection and segmentation result for the mug.</p>
+            </div>
+          </article>
+          <article class="perception-card">
+            <div class="perception-image-frame">
+              <img src="assets/perception/mug/display/background_inpainted_1280x720.jpg" alt="Background completion result">
+            </div>
+            <div class="card-body">
+              <h4>Background Completion</h4>
+              <p>Inpainted scene after removing the foreground mug region.</p>
+            </div>
+          </article>
+          <article class="perception-card">
+            <div class="perception-image-frame">
+              <img src="assets/perception/mug/display/multiview_mug1_1280x720.jpg" alt="Multi-view generation result for the mug">
+            </div>
+            <div class="card-body">
+              <h4>Multi-view Generation</h4>
+              <p>Generated mug views used to support reconstruction and world building.</p>
+            </div>
+          </article>
+          <article class="perception-card">
+            <div class="perception-image-frame">
+              <img src="assets/perception/mug/display/mask_1280x720.jpg" alt="Mug mask">
+            </div>
+            <div class="card-body">
+              <h4>Mask</h4>
+              <p>Binary foreground mask for isolating the object from the input image.</p>
+            </div>
+          </article>
+          <article class="perception-card">
+            <div class="perception-image-frame">
+              <img src="assets/perception/mug/display/pose_points_on_3d_1280x720.jpg" alt="Pose estimation points on the 3D mug">
+            </div>
+            <div class="card-body">
+              <h4>Pose</h4>
+              <p>Pose-aligned 3D points used to connect image evidence with the reconstructed object.</p>
+            </div>
+          </article>
+
+          <article class="perception-card">
+            <div class="perception-viewport" id="perception-mesh-viewport">
+              <div class="teaser-viewport-status">
+                <span class="teaser-status-pill">Drag to orbit</span>
+                <span class="teaser-status-pill">Wheel to zoom</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <h4>Mesh Preview</h4>
+              <p>The original mug OBJ is copied into the site assets and converted into an inline payload for direct browser display.</p>
+            </div>
+          </article>
         </div>
       </div>
     </div>
@@ -1438,6 +1688,29 @@
     </div>
   </div>
 
+  <div class="predictor-modal" id="physwonder-highlights-modal" aria-hidden="true">
+    <div class="predictor-panel highlights-panel" role="dialog" aria-modal="true" aria-labelledby="physwonder-highlights-title">
+      <div class="predictor-header">
+        <div class="predictor-title">
+          <div class="eyebrow">PhysWonder Highlights</div>
+          <h3 id="physwonder-highlights-title">PhysWonder Highlights</h3>
+          <p>PhysWonder: Scalable World Building with Internalized Constitutive Control. (a) State-of-the-art generators often miss material-dependent dynamics, producing collapse, hallucination, rigidification, incoherence, or no material response. (b) PhysWonder-3D builds scalable engine-in-the-loop constitutive simulations and exposes deformation gradients as supervision for particle motion and material response. (c) PhysWonder-Ctrl internalizes this representation through joint modeling, strengthening deformation-gradient control while supporting inference without explicit control videos.</p>
+          <div class="predictor-chips">
+            <span class="predictor-chip">Highlights</span>
+            <span class="predictor-chip">Paper overview</span>
+            <span class="predictor-chip">PhysWonder pipeline</span>
+          </div>
+        </div>
+        <button class="predictor-close" type="button" aria-label="Close PhysWonder highlights" data-modal-close="physwonder-highlights-modal">X</button>
+      </div>
+      <div class="highlights-body">
+        <div class="highlights-frame">
+          <img src="assets/figures/physwonder-highlight.png" alt="PhysWonder highlights overview">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="container">
       <p class="small">
@@ -1449,6 +1722,7 @@
   <script src="assets/vendor/three/three.min.js"></script>
   <script src="assets/vendor/three/OBJLoader.js"></script>
   <script src="assets/teaser/orange/object1.inline.js"></script>
+  <script src="assets/perception/mug/mug1.inline.js"></script>
   <script>
     (() => {
       const openers = document.querySelectorAll('[data-modal-open]');
@@ -1462,7 +1736,9 @@
       const teaserTitle = document.getElementById('interactive-teaser-title');
       const teaserChip = document.getElementById('interactive-teaser-chip');
       const teaserViewport = document.getElementById('teaser-viewport');
+      const perceptionMeshViewport = document.getElementById('perception-mesh-viewport');
       let teaserViewerState = null;
+      let perceptionViewerState = null;
       let activeTeaserObject = 'Mug';
 
       closers.forEach((button) => {
@@ -1670,6 +1946,161 @@
         animate();
       };
 
+      const initPerceptionMeshViewer = () => {
+        if (perceptionViewerState || !perceptionMeshViewport) return;
+        if (!window.THREE || !THREE.OBJLoader) {
+          const fallback = document.createElement('div');
+          fallback.className = 'media-fallback';
+          fallback.textContent = 'Three.js failed to load, so the mesh preview is unavailable.';
+          perceptionMeshViewport.appendChild(fallback);
+          perceptionViewerState = { resizeViewer: () => {}, applyCamera: () => {} };
+          return;
+        }
+
+        const scene = new THREE.Scene();
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 1000);
+        const pivot = new THREE.Group();
+        const objectHolder = new THREE.Group();
+        const ambient = new THREE.HemisphereLight(0xffffff, 0xc9d9ed, 1.25);
+        const keyLight = new THREE.DirectionalLight(0xffffff, 1.1);
+        const rimLight = new THREE.DirectionalLight(0x9fe6c3, 0.74);
+        const ground = new THREE.Mesh(
+          new THREE.CircleGeometry(1.55, 64),
+          new THREE.MeshBasicMaterial({ color: 0xe6f4ee, transparent: true, opacity: 0.74 })
+        );
+
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        perceptionMeshViewport.appendChild(renderer.domElement);
+        renderer.domElement.setAttribute('aria-label', 'Interactive mug mesh preview');
+
+        keyLight.position.set(2.5, 3.2, 4.1);
+        rimLight.position.set(-2.8, 1.8, -3.2);
+        scene.add(ambient, keyLight, rimLight);
+
+        ground.rotation.x = -Math.PI / 2;
+        ground.position.y = -1.1;
+        scene.add(ground);
+
+        pivot.add(objectHolder);
+        scene.add(pivot);
+        camera.position.set(0, 0.2, 5.6);
+
+        const resizeViewer = () => {
+          const rect = perceptionMeshViewport.getBoundingClientRect();
+          if (!rect.width || !rect.height) return;
+          renderer.setSize(rect.width, rect.height, false);
+          camera.aspect = rect.width / rect.height;
+          camera.updateProjectionMatrix();
+        };
+
+        const loader = new THREE.OBJLoader();
+        try {
+          if (!window.__PERCEPTION_MUG_OBJ_BASE64) {
+            throw new Error('Inline mug mesh payload is missing.');
+          }
+          const text = atob(window.__PERCEPTION_MUG_OBJ_BASE64);
+          const sanitized = text
+            .replace(/^mtllib .*$/gm, '')
+            .replace(/^usemtl .*$/gm, '');
+          const obj = loader.parse(sanitized);
+
+          obj.traverse((child) => {
+            if (child.isMesh) {
+              child.material = new THREE.MeshNormalMaterial({
+                flatShading: false,
+                transparent: true,
+                opacity: 0.95
+              });
+            }
+          });
+
+          const box = new THREE.Box3().setFromObject(obj);
+          const center = box.getCenter(new THREE.Vector3());
+          const size = box.getSize(new THREE.Vector3());
+          const maxAxis = Math.max(size.x, size.y, size.z) || 1;
+
+          obj.position.sub(center);
+          obj.scale.setScalar(2.45 / maxAxis);
+          objectHolder.add(obj);
+
+          const resizedBox = new THREE.Box3().setFromObject(obj);
+          ground.position.y = resizedBox.min.y - 0.14;
+          resizeViewer();
+        } catch (error) {
+          const fallback = document.createElement('div');
+          fallback.className = 'placeholder';
+          fallback.textContent = 'Mesh preview could not be loaded.';
+          perceptionMeshViewport.appendChild(fallback);
+        }
+
+        const controls = {
+          isDragging: false,
+          lastX: 0,
+          lastY: 0,
+          pitch: -0.14,
+          yaw: 0.46,
+          distance: 5.6
+        };
+
+        const applyCamera = () => {
+          pivot.rotation.x = controls.pitch;
+          pivot.rotation.y = controls.yaw;
+          camera.position.z = controls.distance;
+          camera.lookAt(0, 0.08, 0);
+        };
+
+        renderer.domElement.addEventListener('pointerdown', (event) => {
+          controls.isDragging = true;
+          controls.lastX = event.clientX;
+          controls.lastY = event.clientY;
+          renderer.domElement.classList.add('is-dragging');
+          renderer.domElement.setPointerCapture(event.pointerId);
+        });
+
+        renderer.domElement.addEventListener('pointermove', (event) => {
+          if (!controls.isDragging) return;
+          const deltaX = event.clientX - controls.lastX;
+          const deltaY = event.clientY - controls.lastY;
+          controls.lastX = event.clientX;
+          controls.lastY = event.clientY;
+          controls.yaw += deltaX * 0.01;
+          controls.pitch = Math.max(-1.1, Math.min(1.1, controls.pitch + deltaY * 0.008));
+          applyCamera();
+        });
+
+        const stopDragging = (event) => {
+          if (!controls.isDragging) return;
+          controls.isDragging = false;
+          renderer.domElement.classList.remove('is-dragging');
+          if (event) {
+            renderer.domElement.releasePointerCapture(event.pointerId);
+          }
+        };
+
+        renderer.domElement.addEventListener('pointerup', stopDragging);
+        renderer.domElement.addEventListener('pointerleave', stopDragging);
+        renderer.domElement.addEventListener('wheel', (event) => {
+          event.preventDefault();
+          controls.distance = Math.max(3.4, Math.min(9.2, controls.distance + event.deltaY * 0.004));
+          applyCamera();
+        }, { passive: false });
+
+        const animate = () => {
+          requestAnimationFrame(animate);
+          if (!controls.isDragging) {
+            controls.yaw += 0.0025;
+            applyCamera();
+          }
+          renderer.render(scene, camera);
+        };
+
+        perceptionViewerState = { renderer, resizeViewer, applyCamera };
+        applyCamera();
+        resizeViewer();
+        animate();
+      };
+
       const openModal = (id) => {
         const modal = document.getElementById(id);
         if (!modal) return;
@@ -1685,6 +2116,14 @@
             teaserViewerState.applyCamera();
           }
         }
+
+        if (id === 'perception-modal') {
+          initPerceptionMeshViewer();
+          if (perceptionViewerState) {
+            perceptionViewerState.resizeViewer();
+            perceptionViewerState.applyCamera();
+          }
+        }
       };
 
       const closeModal = (id) => {
@@ -1698,7 +2137,7 @@
       openers.forEach((button) => {
         button.addEventListener('click', () => {
           if (button.classList.contains('teaser-hotspot')) {
-            updateInteractiveTeaserMeta(button.dataset.objectLabel || button.dataset.object || 'Object');
+            return;
           }
           openModal(button.dataset.modalOpen);
         });
@@ -1708,8 +2147,11 @@
         button.addEventListener('click', (event) => {
           event.preventDefault();
           event.stopPropagation();
-          updateInteractiveTeaserMeta(button.dataset.objectLabel || button.dataset.object || 'Object');
-          openModal('interactive-teaser-modal');
+          const targetModal = button.dataset.modalOpen || 'interactive-teaser-modal';
+          if (targetModal === 'interactive-teaser-modal') {
+            updateInteractiveTeaserMeta(button.dataset.objectLabel || button.dataset.object || 'Object');
+          }
+          openModal(targetModal);
         });
       });
 
@@ -1736,6 +2178,9 @@
       window.addEventListener('resize', () => {
         if (teaserViewerState) {
           teaserViewerState.resizeViewer();
+        }
+        if (perceptionViewerState) {
+          perceptionViewerState.resizeViewer();
         }
       });
     })();
