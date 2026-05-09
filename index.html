@@ -1041,6 +1041,179 @@
     .physwonderctrl-inline .physwonder3d-media{
       border-radius:10px;
     }
+    .control-viewer{
+      display:grid;
+      gap:14px;
+      padding:14px;
+      border:1px solid rgba(17,17,17,.08);
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,248,250,.94));
+      box-shadow:0 16px 28px rgba(15,23,42,.07);
+    }
+    .control-panels{
+      display:grid;
+      gap:10px;
+      overflow-x:auto;
+      padding-bottom:2px;
+    }
+    .control-panel{
+      display:none;
+      min-width:1560px;
+    }
+    .control-panel.is-active{
+      display:grid;
+      gap:10px;
+    }
+    .control-row{
+      display:grid;
+      grid-template-columns:112px repeat(8, minmax(0,1fr));
+      gap:10px;
+      align-items:stretch;
+      min-width:0;
+    }
+    .control-row.is-header{
+      align-items:end;
+    }
+    .control-row-label,
+    .control-column-label,
+    .control-group-label{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-width:0;
+      padding:8px;
+      border-radius:10px;
+      background:rgba(15,23,42,.06);
+      color:#334154;
+      font-size:11px;
+      font-weight:900;
+      line-height:1.2;
+      text-align:center;
+      text-transform:uppercase;
+    }
+    .control-column-label{
+      min-height:30px;
+      background:transparent;
+      color:#526174;
+      letter-spacing:.06em;
+    }
+    .control-group-label{
+      min-height:38px;
+      background:rgba(255,255,255,.78);
+      color:#111827;
+      border:1px solid rgba(17,17,17,.08);
+      letter-spacing:.04em;
+    }
+    .control-group-label.elastic{border-top:3px solid #0a84ff}
+    .control-group-label.rigid{border-top:3px solid #111827}
+    .control-group-label.sand{border-top:3px solid #d97706}
+    .control-group-label.snow{border-top:3px solid #38bdf8}
+    .control-group-label span{
+      color:#607083;
+      font-size:9px;
+      letter-spacing:.06em;
+    }
+    .control-viewer .physwonder3d-media{
+      aspect-ratio:4/3.1;
+      border-radius:10px;
+    }
+    .control-viewer .physwonder3d-media figcaption{
+      font-size:9px;
+      line-height:1.2;
+      padding:4px 6px;
+      max-width:calc(100% - 20px);
+      white-space:normal;
+      border-radius:10px;
+    }
+    .control-tabs{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:8px;
+      padding-top:2px;
+    }
+    .control-tab{
+      border:1px solid rgba(17,17,17,.1);
+      border-radius:999px;
+      background:#fff;
+      color:#334154;
+      font:inherit;
+      font-size:13px;
+      font-weight:850;
+      padding:8px 14px;
+      cursor:pointer;
+      transition:transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+    }
+    .control-tab:hover{
+      transform:translateY(-1px);
+      border-color:rgba(10,132,255,.36);
+    }
+    .control-tab.is-active{
+      background:#111827;
+      border-color:#111827;
+      color:#fff;
+    }
+    .control-viewer > .control-panel{
+      display:none !important;
+    }
+    .latent-predictor-compare{
+      display:grid;
+      gap:12px;
+      overflow-x:auto;
+      padding-bottom:4px;
+    }
+    .latent-compare-head,
+    .latent-compare-row{
+      display:grid;
+      grid-template-columns:minmax(230px,.85fr) repeat(2, minmax(260px,1fr));
+      gap:12px;
+      align-items:stretch;
+      min-width:860px;
+    }
+    .latent-compare-head{
+      padding:0 4px;
+      color:#526174;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .latent-compare-row{
+      padding:12px;
+      border:1px solid rgba(17,17,17,.08);
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,248,250,.94));
+      box-shadow:0 16px 28px rgba(15,23,42,.07);
+    }
+    .latent-prompt{
+      display:flex;
+      align-items:center;
+      min-width:0;
+      min-height:150px;
+      padding:16px;
+      border-radius:14px;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(10,132,255,.24), transparent 30%),
+        linear-gradient(135deg, #050507 0%, #141820 100%);
+      color:#f8fafc;
+      font-size:15px;
+      font-weight:850;
+      line-height:1.35;
+    }
+    .latent-prompt p{
+      margin:0;
+      color:inherit;
+    }
+    .latent-predictor-compare .physwonder3d-media{
+      aspect-ratio:4/3;
+      border-radius:12px;
+    }
+    .latent-predictor-compare .physwonder3d-media figcaption{
+      font-size:10px;
+      max-width:calc(100% - 20px);
+      white-space:normal;
+      border-radius:10px;
+    }
     .physwonder3d-table-head{
       padding:0 4px;
       color:#526174;
@@ -1394,6 +1567,20 @@
       .hero-media,.twocol,.grid-3,.grid-2{grid-template-columns:1fr}
       .perception-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
+    @media (max-width: 900px){
+      .control-panel{
+        min-width:1320px;
+      }
+      .control-row{
+        grid-template-columns:92px repeat(8, minmax(0,1fr));
+      }
+      .control-row-label,
+      .control-column-label,
+      .control-group-label{
+        font-size:10px;
+        padding:6px;
+      }
+    }
     @media (max-width: 760px){
       .section{padding:56px 0}
       .grid-4,.comparison-grid,.perception-grid{grid-template-columns:1fr}
@@ -1411,6 +1598,12 @@
       }
       .figure-overlay{
         inset:56% auto auto 66%;
+      }
+      .control-viewer{
+        overflow-x:auto;
+      }
+      .control-panel{
+        min-width:1120px;
       }
       .teaser-hotspot{
         width:18px;
@@ -1465,21 +1658,21 @@
             </span>
             <span class="btn-arrow">-&gt;</span>
           </a>
-          <a class="btn" href="#framework">
+          <a class="btn" href="#physwonder-3d">
             <span class="btn-copy">
               <span class="btn-kicker">Highlights</span>
               <span class="btn-label">PhysWonder-3D</span>
             </span>
             <span class="btn-arrow">-&gt;</span>
           </a>
-          <a class="btn" href="#abstract">
+          <a class="btn" href="#physwonder-ctrl">
             <span class="btn-copy">
               <span class="btn-kicker">Highlights</span>
               <span class="btn-label">PhysWonder-Ctrl</span>
             </span>
             <span class="btn-arrow">-&gt;</span>
           </a>
-          <a class="btn" href="#framework">
+          <a class="btn" href="#more-info">
             <span class="btn-copy">
               <span class="btn-kicker">More Information</span>
               <span class="btn-label">Key Figures</span>
@@ -1581,7 +1774,7 @@
 
   <main>
 
-    <section id="framework" class="section">
+    <section id="physwonder-3d" class="section">
       <div class="container">
         <div class="section-head">
           
@@ -1764,7 +1957,7 @@
           </div>
 
           <div class="story-grid">
-            <article class="card story-copy">
+            <article id="physwonder-ctrl" class="card story-copy">
               <div>
                 <div class="eyebrow">PhysWonder-Ctrl: Dual-Branch Modeling with Internalized Constitutive Representation</div>
                 <!-- <h3>PhysWonder-Ctrl</h3> -->
@@ -1798,12 +1991,12 @@
           <div class="physwonder3d-table physwonderctrl-inline" aria-label="PhysWonder-Ctrl reference-free comparison">
             <div class="physwonderctrl-table-head" aria-hidden="true">
               <span>Prompt</span>
-              <span>PhysWonder-3D Engine-in-the-loop</span>
-              <span>PhysWonder-Ctrl</span>
+              <span>PhysWonder-3D<br>Engine-in-the-loop</span>
+              <span>PhysWonder-Ctrl<br>Ours</span>
               <span>Wan2.1-TI2V-1.3B Fine-Tuning (Prompt)</span>
-              <span>ForcePrompting</span>
-              <span>Seedance 2.0</span>
-              <span>VideoREPA</span>
+              <span>ForcePrompting<br>NeurIPS-25</span>
+              <span>Seedance 2.0<br>Closed-Source SOTA Model</span>
+              <span>VideoREPA<br>NeurIPS-25</span>
             </div>
 
             <article class="physwonderctrl-object-row" data-object="banana-elastic">
@@ -1838,7 +2031,7 @@
 
             <article class="physwonderctrl-object-row" data-object="banana-rigid">
               <div class="physwonder3d-prompt">
-                <p>"A <span class="material">rigid</span> banana starts on the ground, initially moving to the right, causing deformation."</p>
+                <p>"A <span class="material">rigid</span> banana starts on the ground, initially moving to the right, without visible deformation."</p>
               </div>
               <figure class="physwonder3d-media">
                 <img src="assets/gifs/physwonderctrl/banana-rigid/physwonder-3d.gif" alt="Rigid banana - PhysWonder-3D">
@@ -2035,61 +2228,374 @@
               </tbody>
             </table>
           </div>
+
+          <div class="section-head" style="margin-top:18px">
+            <div>
+              <h3>Deformation-Gradients provide more effective constitutive control than motion-level signals</h3>
+              <p>
+                All control-representation comparisons use the same training-data scale. Trajectory controls and deformation-gradient controls are directly obtained from PhysWonder-3D simulation with exactly the same particle count, while optical-flow controls are extracted from the rendered ground-truth videos. As a result, trajectory and optical flow serves as an upper-bound reference for motion-level control methods such as PhysCtrl and VideoJAM.
+              </p>
+            </div>
+          </div>
+          <div class="control-viewer" aria-label="Control representation ablation comparison">
+            <div class="control-panels" data-control-panels></div>
+            <article class="control-panel is-active" data-control-panel="alcohol">
+              <div class="control-gt">
+                <div class="control-column-label">GT<br>PhysWonder-3D Engine-in-the-loop</div>
+                <figure class="physwonder3d-media">
+                  <video controls autoplay muted loop playsinline preload="metadata">
+                    <source src="assets/control/alcohol/wan21_lr1e5_eval__physwonder3d_objaverse_epoch-1_0020_alcohol_6__constitutive__elastic_gt.mp4" type="video/mp4">
+                  </video>
+                  <figcaption>Alcohol - GT</figcaption>
+                </figure>
+              </div>
+              <div class="control-stack">
+                <div class="control-row">
+                  <div class="control-row-label"></div>
+                  <div class="control-column-label">Control Signal</div>
+                  <div class="control-column-label">Prediction Result</div>
+                </div>
+                <div class="control-row">
+                  <div class="control-row-label">Deformation<br>Gradient</div>
+                  <figure class="physwonder3d-media">
+                    <video controls autoplay muted loop playsinline preload="metadata">
+                      <source src="assets/control/alcohol/wan21_lr1e5_eval__physwonder3d_objaverse_epoch-1_0020_alcohol_6__constitutive__elastic_control.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Deformation-Gradient Control</figcaption>
+                  </figure>
+                  <figure class="physwonder3d-media">
+                    <video controls autoplay muted loop playsinline preload="metadata">
+                      <source src="assets/control/alcohol/wan21_lr1e5_eval__physwonder3d_objaverse_epoch-1_0020_alcohol_6__constitutive__elastic_pred.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>PhysWonder-Ctrl GT Deformation-Gradient Control</figcaption>
+                  </figure>
+                </div>
+                <div class="control-row">
+                  <div class="control-row-label">Trajectory</div>
+                  <figure class="physwonder3d-media">
+                    <video controls autoplay muted loop playsinline preload="metadata">
+                      <source src="assets/control/alcohol/wan21_tracks_lr1e5_eval_lora_epoch1_0020_alcohol_6__constitutive__elastic_control.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Trajectory Control</figcaption>
+                  </figure>
+                  <figure class="physwonder3d-media">
+                    <video controls autoplay muted loop playsinline preload="metadata">
+                      <source src="assets/control/alcohol/wan21_tracks_lr1e5_eval_lora_epoch1_0020_alcohol_6__constitutive__elastic_pred.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Wan2.1-TI2V-1.3B GT Trajectory Control</figcaption>
+                  </figure>
+                </div>
+                <div class="control-row">
+                  <div class="control-row-label">Optical<br>Flow</div>
+                  <figure class="physwonder3d-media">
+                    <video controls autoplay muted loop playsinline preload="metadata">
+                      <source src="assets/control/alcohol/wan21_raft_small_lr1e5_eval_lora_epoch1_0020_alcohol_6__constitutive__elastic_control.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Optical Flow Control</figcaption>
+                  </figure>
+                  <figure class="physwonder3d-media">
+                    <video controls autoplay muted loop playsinline preload="metadata">
+                      <source src="assets/control/alcohol/wan21_raft_small_lr1e5_eval_lora_epoch1_0020_alcohol_6__constitutive__elastic_pred.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Wan2.1-TI2V-1.3B GT Optical Flow Control</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </article>
+
+            <article class="control-panel" data-control-panel="bagel">
+              <div class="control-gt">
+                <div class="control-column-label">GT<br>PhysWonder-3D Engine-in-the-loop</div>
+                <figure class="physwonder3d-media">
+                  <video controls muted loop playsinline preload="metadata">
+                    <source src="assets/control/bagel/wan21_lr1e5_eval__physwonder3d_objaverse_epoch-1_0164_bagel_6__constitutive__elastic_gt.mp4" type="video/mp4">
+                  </video>
+                  <figcaption>Bagel - GT</figcaption>
+                </figure>
+              </div>
+              <div class="control-stack">
+                <div class="control-row">
+                  <div class="control-row-label"></div>
+                  <div class="control-column-label">Control Signal</div>
+                  <div class="control-column-label">Prediction Result</div>
+                </div>
+                <div class="control-row">
+                  <div class="control-row-label">Deformation<br>Gradient</div>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/bagel/wan21_lr1e5_eval__physwonder3d_objaverse_epoch-1_0164_bagel_6__constitutive__elastic_control.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Deformation-Gradient Control</figcaption>
+                  </figure>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/bagel/wan21_lr1e5_eval__physwonder3d_objaverse_epoch-1_0164_bagel_6__constitutive__elastic_pred.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>PhysWonder-Ctrl GT Deformation-Gradient Control</figcaption>
+                  </figure>
+                </div>
+                <div class="control-row">
+                  <div class="control-row-label">Trajectory</div>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/bagel/wan21_tracks_lr1e5_eval_lora_epoch1_0164_bagel_6__constitutive__elastic_control.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Trajectory Control</figcaption>
+                  </figure>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/bagel/wan21_tracks_lr1e5_eval_lora_epoch1_0164_bagel_6__constitutive__elastic_pred.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Wan2.1-TI2V-1.3B GT Trajectory Control</figcaption>
+                  </figure>
+                </div>
+                <div class="control-row">
+                  <div class="control-row-label">Optical<br>Flow</div>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/bagel/wan21_raft_small_lr1e5_eval_lora_epoch1_0164_bagel_6__constitutive__elastic_control.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Optical Flow Control</figcaption>
+                  </figure>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/bagel/wan21_raft_small_lr1e5_eval_lora_epoch1_0164_bagel_6__constitutive__elastic_pred.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Wan2.1-TI2V-1.3B GT Optical Flow Control</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </article>
+
+            <article class="control-panel" data-control-panel="banana">
+              <div class="control-gt">
+                <div class="control-column-label">GT<br>PhysWonder-3D Engine-in-the-loop</div>
+                <figure class="physwonder3d-media">
+                  <video controls muted loop playsinline preload="metadata">
+                    <source src="assets/control/banana/wan21_lr1e5_eval__physwonder3d_objaverse_epoch-1_0248_banana_14__constitutive__elastic_gt.mp4" type="video/mp4">
+                  </video>
+                  <figcaption>Banana - GT</figcaption>
+                </figure>
+              </div>
+              <div class="control-stack">
+                <div class="control-row">
+                  <div class="control-row-label"></div>
+                  <div class="control-column-label">Control Signal</div>
+                  <div class="control-column-label">Prediction Result</div>
+                </div>
+                <div class="control-row">
+                  <div class="control-row-label">Deformation<br>Gradient</div>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/banana/wan21_lr1e5_eval__physwonder3d_objaverse_epoch-1_0248_banana_14__constitutive__elastic_control.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Deformation-Gradient Control</figcaption>
+                  </figure>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/banana/wan21_lr1e5_eval__physwonder3d_objaverse_epoch-1_0248_banana_14__constitutive__elastic_pred.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>PhysWonder-Ctrl GT Deformation-Gradient Control</figcaption>
+                  </figure>
+                </div>
+                <div class="control-row">
+                  <div class="control-row-label">Trajectory</div>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/banana/wan21_tracks_lr1e5_eval_lora_epoch1_0248_banana_14__constitutive__elastic_control.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Trajectory Control</figcaption>
+                  </figure>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/banana/wan21_tracks_lr1e5_eval_lora_epoch1_0248_banana_14__constitutive__elastic_pred.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Wan2.1-TI2V-1.3B GT Trajectory Control</figcaption>
+                  </figure>
+                </div>
+                <div class="control-row">
+                  <div class="control-row-label">Optical<br>Flow</div>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/banana/wan21_raft_small_lr1e5_eval_lora_epoch1_0248_banana_14__constitutive__elastic_control.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Optical Flow Control</figcaption>
+                  </figure>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/banana/wan21_raft_small_lr1e5_eval_lora_epoch1_0248_banana_14__constitutive__elastic_pred.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Wan2.1-TI2V-1.3B GT Optical Flow Control</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </article>
+
+            <article class="control-panel" data-control-panel="chocolate">
+              <div class="control-gt">
+                <div class="control-column-label">GT<br>PhysWonder-3D Engine-in-the-loop</div>
+                <figure class="physwonder3d-media">
+                  <video controls muted loop playsinline preload="metadata">
+                    <source src="assets/control/chocolate bar/wan21_lr1e5_eval__physwonder3d_objaverse_epoch-1_0320_bar_3__constitutive__elastic_gt.mp4" type="video/mp4">
+                  </video>
+                  <figcaption>Chocolate Bar - GT</figcaption>
+                </figure>
+              </div>
+              <div class="control-stack">
+                <div class="control-row">
+                  <div class="control-row-label"></div>
+                  <div class="control-column-label">Control Signal</div>
+                  <div class="control-column-label">Prediction Result</div>
+                </div>
+                <div class="control-row">
+                  <div class="control-row-label">Deformation<br>Gradient</div>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/chocolate bar/wan21_lr1e5_eval__physwonder3d_objaverse_epoch-1_0320_bar_3__constitutive__elastic_control.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Deformation-Gradient Control</figcaption>
+                  </figure>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/chocolate bar/wan21_lr1e5_eval__physwonder3d_objaverse_epoch-1_0320_bar_3__constitutive__elastic_pred.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>PhysWonder-Ctrl GT Deformation-Gradient Control</figcaption>
+                  </figure>
+                </div>
+                <div class="control-row">
+                  <div class="control-row-label">Trajectory</div>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/chocolate bar/wan21_tracks_lr1e5_eval_lora_epoch1_0320_bar_3__constitutive__elastic_control.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Trajectory Control</figcaption>
+                  </figure>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/chocolate bar/wan21_tracks_lr1e5_eval_lora_epoch1_0320_bar_3__constitutive__elastic_pred.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Wan2.1-TI2V-1.3B GT Trajectory Control</figcaption>
+                  </figure>
+                </div>
+                <div class="control-row">
+                  <div class="control-row-label">Optical<br>Flow</div>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/chocolate bar/wan21_raft_small_lr1e5_eval_lora_epoch1_0320_bar_3__constitutive__elastic_control.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Optical Flow Control</figcaption>
+                  </figure>
+                  <figure class="physwonder3d-media">
+                    <video controls muted loop playsinline preload="metadata">
+                      <source src="assets/control/chocolate bar/wan21_raft_small_lr1e5_eval_lora_epoch1_0320_bar_3__constitutive__elastic_pred.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Wan2.1-TI2V-1.3B GT Optical Flow Control</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </article>
+
+            <div class="control-tabs" role="tablist" aria-label="Control representation cases">
+              <button class="control-tab is-active" type="button" data-control-tab="alcohol" aria-selected="true">Alcohol</button>
+              <button class="control-tab" type="button" data-control-tab="bagel" aria-selected="false">Bagel</button>
+              <button class="control-tab" type="button" data-control-tab="banana" aria-selected="false">Banana</button>
+              <button class="control-tab" type="button" data-control-tab="chocolate" aria-selected="false">Chocolate Bar</button>
+            </div>
+          </div>
+
+          <div class="section-head" style="margin-top:18px">
+            <div>
+              <h3> Can the Control Latent Predictor Learn Material-Response Aware Controls? </h3>
+              <p>
+                We compare generation with the learned control latent predictor against prompt-only generation using the same reference condition. The predictor produces material-response-aware controls without explicit test-time control videos, improving constitutive behavior across sand, snow, elastic, and rigid examples.
+              </p>
+            </div>
+          </div>
+          <div class="latent-predictor-compare" aria-label="Control latent predictor comparison">
+            <div class="latent-compare-head" aria-hidden="true">
+              <span>Prompt</span>
+              <span>Control Latent Predictor</span>
+              <span>Prompt Only</span>
+            </div>
+
+            <article class="latent-compare-row">
+              <div class="latent-prompt">
+                <p>"A Sand water cup with Young's modulus E=4000 starts on the ground, initially moving to the right, causing deformation."</p>
+              </div>
+              <figure class="physwonder3d-media">
+                <video controls autoplay muted loop playsinline preload="metadata">
+                  <source src="assets/representation-compare/sample_2_pred_control_gen.mp4" type="video/mp4">
+                </video>
+                <figcaption>Control Latent Predictor</figcaption>
+              </figure>
+              <figure class="physwonder3d-media">
+                <video controls autoplay muted loop playsinline preload="metadata">
+                  <source src="assets/representation-compare/sample_2_prompt_only_gen.mp4" type="video/mp4">
+                </video>
+                <figcaption>Prompt Only</figcaption>
+              </figure>
+            </article>
+
+            <article class="latent-compare-row">
+              <div class="latent-prompt">
+                <p>"A Snow alcohol with Young's modulus E=1000 starts on the ground, initially moving to the right, causing deformation."</p>
+              </div>
+              <figure class="physwonder3d-media">
+                <video controls autoplay muted loop playsinline preload="metadata">
+                  <source src="assets/representation-compare/sample_21_pred_control_gen.mp4" type="video/mp4">
+                </video>
+                <figcaption>Control Latent Predictor</figcaption>
+              </figure>
+              <figure class="physwonder3d-media">
+                <video controls autoplay muted loop playsinline preload="metadata">
+                  <source src="assets/representation-compare/sample_21_prompt_only_gen.mp4" type="video/mp4">
+                </video>
+                <figcaption>Prompt Only</figcaption>
+              </figure>
+            </article>
+
+            <article class="latent-compare-row">
+              <div class="latent-prompt">
+                <p>"An Elastic banana with Young's modulus E=10000 starts on the ground, initially moving to the top, causing deformation."</p>
+              </div>
+              <figure class="physwonder3d-media">
+                <video controls autoplay muted loop playsinline preload="metadata">
+                  <source src="assets/representation-compare/sample_245_pred_control_gen.mp4" type="video/mp4">
+                </video>
+                <figcaption>Control Latent Predictor</figcaption>
+              </figure>
+              <figure class="physwonder3d-media">
+                <video controls autoplay muted loop playsinline preload="metadata">
+                  <source src="assets/representation-compare/sample_245_prompt_only_gen.mp4" type="video/mp4">
+                </video>
+                <figcaption>Prompt Only</figcaption>
+              </figure>
+            </article>
+
+            <article class="latent-compare-row">
+              <div class="latent-prompt">
+                <p>"A Rigid donut starts on the ground, initially moving to the right, without visible deformation."</p>
+              </div>
+              <figure class="physwonder3d-media">
+                <video controls autoplay muted loop playsinline preload="metadata">
+                  <source src="assets/representation-compare/sample_161_pred_control_gen.mp4" type="video/mp4">
+                </video>
+                <figcaption>Control Latent Predictor</figcaption>
+              </figure>
+              <figure class="physwonder3d-media">
+                <video controls autoplay muted loop playsinline preload="metadata">
+                  <source src="assets/representation-compare/sample_161_prompt_only_gen.mp4" type="video/mp4">
+                </video>
+                <figcaption>Prompt Only</figcaption>
+              </figure>
+            </article>
+          </div>
+        
+        
         </div>
   
 
 
-        <!-- <div class="framework-stack">
-          <figure class="card figure-card" id="figures">
-            <div class="figure-viewer">
-              <img class="figure-image" src="assets/figures/teaser-sota.png" alt="PhysWonder teaser figure">
-            </div>
-            <figcaption class="figcap">
-              <strong>PhysWonder: Scalable World Building with Internalized Constitutive Control.</strong> PhysWonder-3D builds scalable engine-in-the-loop constitutive simulations and exposes deformation gradients as supervision for particle motion and material response; PhysWonder-Ctrl internalizes this representation through joint modeling, strengthening deformation-gradient control while supporting inference without explicit control videos.
-            </figcaption>
-          </figure>
-
-          <figure class="card figure-card ctrl-figure">
-            <div class="figure-viewer">
-              <img class="figure-image" src="assets/figures/PhysWonder-Ctrl_Pipeline_v2.png" alt="PhysWonder-Ctrl framework figure">
-              <div class="figure-overlay">
-                <span class="figure-badge">Main generator + latent predictor + train / inference split</span>
-                <button class="detail-trigger" type="button" data-modal-open="predictor-modal">Inspect Predictor -&gt;</button>
-              </div>
-            </div>
-            <figcaption class="figcap">
-              <strong>The Pipeline of PhysWonder-Ctrl.</strong> We propose a dual-branch joint modeling framework that leverages deformation gradients as intermediate physical representations for physically controllable video generation. <strong>Click the 🔎 Control Latent Predictor Framework button on the figure to view details.</strong>
-            </figcaption>
-            <div class="figcap-actions" style="padding:0 18px 16px">
-              <button class="figure-link" type="button" data-modal-open="predictor-modal">View Predictor Detail -&gt;</button>
-            </div>
-          </figure>
-        </div>
-
-        <div class="grid mini-figures">
-          <figure class="card figure-card mini-figure pipeline-strip-figure">
-            <div class="figure-viewer">
-              <img class="figure-image" src="assets/figures/PhysWonder-3D_Pipeline.png" alt="PhysWonder-3D framework figure">
-            </div>
-            <figcaption class="figcap">
-              <strong>PhysWonder-3D: Scalable Physically Aligned Data Synthesis.</strong> Our pipeline combines constitutive sampling guided by Vision-Language Models (VLMs) and high-fidelity physical simulation to generate physically aligned videos and deformation-gradient-based representations.
-            </figcaption>
-          </figure>
-          <article class="card"><div class="card-body">
-            <h3>Why this ordering works</h3>
-            <p>Teaser first, then simulation, then controllable generation. Giving each figure its own row makes the story easier to scan and much more deliberate.</p>
-          </div></article>
-          <article class="card"><div class="card-body">
-            <h3>Space guidance</h3>
-            <p>These are now rendered as stable PNG images rather than embedded PDFs, so spacing stays correct and the panels feel cleaner across screen sizes.</p>
-          </div></article>
-          <article class="card"><div class="card-body">
-            <h3>Asset naming</h3>
-            <p>Live assets come from <span class="code">teaser-sota.png</span>, <span class="code">PhysWonder-3D_Pipeline.png</span>, <span class="code">PhysWonder-Ctrl_Pipeline_v2.png</span>, and <span class="code">PhysWonder-Ctrl_Predictor.png</span>.</p>
-          </div></article>
-        </div>
-      </div>
-    </section> -->
 
   </main>
 
@@ -2124,11 +2630,11 @@
         <div class="predictor-title">
           <div class="eyebrow">Perception and World Building</div>
           <!-- <h3 id="perception-title">Perception and World Building</h3> -->
-          <div class="predictor-chips">
+          <!-- <div class="predictor-chips">
             <span class="predictor-chip">Grounding SAM</span>
             <span class="predictor-chip">Background completion</span>
             <span class="predictor-chip">Mesh preview</span>
-          </div>
+          </div> -->
         </div>
         <button class="predictor-close" type="button" aria-label="Close perception and world building" data-modal-close="perception-modal">X</button>
       </div>
@@ -2202,13 +2708,8 @@
       <div class="predictor-header">
         <div class="predictor-title">
           <div class="eyebrow">Interactive Teaser</div>
-          <h3 id="interactive-teaser-title">PhysWonder-3D Outputs</h3>
+          <h3 id="interactive-teaser-title">PhysWonder-3D: Scalable Pipeline for Unified Constitutive Simulation and Data Synthesis</h3>
           <p id="interactive-teaser-description">Four outputs-teaser cases are shown as aligned rows: prompt, deformation-gradient video, rendered simulation video, and two baseline comparison videos.</p>
-          <div class="predictor-chips">
-            <span class="predictor-chip" id="interactive-teaser-chip">Selected: Object</span>
-            <span class="predictor-chip">Prompt + videos</span>
-            <span class="predictor-chip">4 outputs-teaser rows</span>
-          </div>
         </div>
         <button class="predictor-close" type="button" aria-label="Close interactive teaser detail" data-modal-close="interactive-teaser-modal">×</button>
       </div>
@@ -2217,7 +2718,7 @@
           <div class="physwonder3d-table-head" aria-hidden="true">
             <span>Prompt</span>
             <span>Deformation-Gradient</span>
-            <span>Rendering</span>
+            <span>PhysWonder-3D</span>
             <span>Comparison A</span>
             <span>Comparison B</span>
           </div>
@@ -2238,13 +2739,13 @@
               <video controls autoplay muted loop playsinline preload="metadata">
                 <source src="assets/physwonder3d/mug/mug_physgen3d.mp4" type="video/mp4">
               </video>
-              <figcaption>PhysGen3D</figcaption>
+              <figcaption>PhysGen3D [CVPR-25]</figcaption>
             </figure>
             <figure class="physwonder3d-media">
               <video controls autoplay muted loop playsinline preload="metadata">
                 <source src="assets/physwonder3d/mug/mug_seedance.mp4" type="video/mp4">
               </video>
-              <figcaption>Seedance</figcaption>
+              <figcaption>Seedance 2.0</figcaption>
             </figure>
           </article>
 
@@ -2268,13 +2769,13 @@
               <video controls autoplay muted loop playsinline preload="metadata">
                 <source src="assets/physwonder3d/snowman/snowman_wonderplay.mp4" type="video/mp4">
               </video>
-              <figcaption>WonderPlay</figcaption>
+              <figcaption>WonderPlay [ICCV-25]</figcaption>
             </figure>
             <figure class="physwonder3d-media">
               <video controls autoplay muted loop playsinline preload="metadata">
                 <source src="assets/physwonder3d/snowman/snowman_seedance.mp4" type="video/mp4">
               </video>
-              <figcaption>Seedance</figcaption>
+              <figcaption>Seedance 2.0</figcaption>
             </figure>
           </article>
 
@@ -2298,13 +2799,13 @@
               <video controls autoplay muted loop playsinline preload="metadata">
                 <source src="assets/physwonder3d/bear/bear_realwonder.mp4" type="video/mp4">
               </video>
-              <figcaption>RealWonder</figcaption>
+              <figcaption>RealWonder [Current SOTA]</figcaption>
             </figure>
             <figure class="physwonder3d-media">
               <video controls autoplay muted loop playsinline preload="metadata">
                 <source src="assets/physwonder3d/bear/bear_seedance.mp4" type="video/mp4">
               </video>
-              <figcaption>Seedance</figcaption>
+              <figcaption>Seedance 2.0</figcaption>
             </figure>
           </article>
 
@@ -2328,13 +2829,13 @@
               <video controls autoplay muted loop playsinline preload="metadata">
                 <source src="assets/physwonder3d/duck/duck_realwonder.mp4" type="video/mp4">
               </video>
-              <figcaption>RealWonder</figcaption>
+              <figcaption>RealWonder [Current SOTA]</figcaption>
             </figure>
             <figure class="physwonder3d-media">
               <video controls autoplay muted loop playsinline preload="metadata">
                 <source src="assets/physwonder3d/duck/duck_seedance.mp4" type="video/mp4">
               </video>
-              <figcaption>Seedance</figcaption>
+              <figcaption>Seedance 2.0</figcaption>
             </figure>
           </article>
         </div>
@@ -2356,10 +2857,10 @@
         <div class="physwonder3d-table" aria-label="PhysWonder-Ctrl reference-free comparison">
           <div class="physwonderctrl-table-head" aria-hidden="true">
             <span>Prompt</span>
-            <span>PhysWonder-3D Engine-in-the-loop</span>
-            <span>PhysWonder-Ctrl</span>
-            <span>Wan2.1-TI2V-1.3B Fine-Tuning (Prompt)</span>
-            <span>Seedance 2.0</span>
+            <span>PhysWonder-3D<br>Engine-in-the-loop</span>
+            <span>PhysWonder-Ctrl<br>Ours</span>
+            <span>Wan2.1-TI2V-1.3B<br>Fine-Tuning (Prompt)</span>
+            <span>Seedance 2.0<br>Closed-Source SOTA Model</span>
             <span>VideoREPA</span>
           </div>
 
@@ -2401,7 +2902,7 @@
 
           <article class="physwonderctrl-object-row" data-object="banana-rigid">
             <div class="physwonder3d-prompt">
-              <p>"A <span class="material">rigid</span> banana starts on the ground, initially moving to the right, causing deformation."</p>
+              <p>"A <span class="material">rigid</span> banana starts on the ground, initially moving to the right, without visible deformation."</p>
             </div>
             <figure class="physwonder3d-media">
               <video controls autoplay muted loop playsinline preload="metadata">
@@ -2536,6 +3037,9 @@
       const teaserTitle = document.getElementById('interactive-teaser-title');
       const teaserChip = document.getElementById('interactive-teaser-chip');
       const perceptionMeshViewport = document.getElementById('perception-mesh-viewport');
+      const controlPanelHost = document.querySelector('[data-control-panels]');
+      const controlTabs = document.querySelectorAll('[data-control-tab]');
+      let controlPanels = document.querySelectorAll('[data-control-panel]');
       let perceptionViewerState = null;
       let activeTeaserObject = 'Object';
 
@@ -2575,12 +3079,147 @@
       const updateInteractiveTeaserMeta = (objectLabel) => {
         activeTeaserObject = objectLabel || 'Object';
         if (teaserTitle) {
-          teaserTitle.textContent = `PhysWonder-3D Outputs - ${activeTeaserObject}`;
+          teaserTitle.textContent = `PhysWonder-3D: Scalable Pipeline for Unified Constitutive Simulation and Data Synthesis`;
         }
         if (teaserChip) {
           teaserChip.textContent = `Selected: ${activeTeaserObject}`;
         }
       };
+
+      const controlCases = [
+        { key: 'alcohol', label: 'Alcohol', folder: 'alcohol', object: 'alcohol_6', ids: { elastic: '0020', rigid: '0021', sand: '0022', snow: '0023' } },
+        { key: 'bagel', label: 'Bagel', folder: 'bagel', object: 'bagel_6', ids: { elastic: '0164', rigid: '0165', sand: '0166', snow: '0167' } },
+        { key: 'banana', label: 'Banana', folder: 'banana', object: 'banana_14', ids: { elastic: '0248', rigid: '0249', sand: '0250', snow: '0251' } },
+        { key: 'chocolate', label: 'Chocolate Bar', folder: 'chocolate bar', object: 'bar_3', ids: { elastic: '0320', rigid: '0321', sand: '0322', snow: '0323' } }
+      ];
+      const controlMethods = [
+        {
+          key: 'deformation',
+          label: 'Deformation<br>Gradient',
+          resultLabel: 'PhysWonder-Ctrl',
+          prefix: 'wan21_lr1e5_eval__physwonder3d_objaverse_epoch-1_'
+        },
+        {
+          key: 'trajectory',
+          label: 'Trajectory',
+          resultLabel: 'Wan2.1-TI2V-1.3B',
+          prefix: 'wan21_tracks_lr1e5_eval_lora_epoch1_'
+        },
+        {
+          key: 'flow',
+          label: 'Optical<br>Flow',
+          resultLabel: 'Wan2.1-TI2V-1.3B',
+          prefix: 'wan21_raft_small_lr1e5_eval_lora_epoch1_'
+        }
+      ];
+      const controlRepresentations = [
+        { key: 'elastic', label: 'Elastic' },
+        { key: 'rigid', label: 'Rigid' },
+        { key: 'sand', label: 'Sand' },
+        { key: 'snow', label: 'Snow' }
+      ];
+
+      const controlVideoPath = (controlCase, method, representation, kind) => {
+        const id = controlCase.ids[representation.key];
+        return `assets/control/${controlCase.folder}/${method.prefix}${id}_${controlCase.object}__constitutive__${representation.key}_${kind}.mp4`;
+      };
+
+      const createControlFigure = (controlCase, method, representation, kind) => {
+        const figure = document.createElement('figure');
+        figure.className = 'physwonder3d-media';
+
+        const video = document.createElement('video');
+        video.controls = true;
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.preload = 'metadata';
+
+        const source = document.createElement('source');
+        source.src = controlVideoPath(controlCase, method, representation, kind);
+        source.type = 'video/mp4';
+        video.appendChild(source);
+
+        const caption = document.createElement('figcaption');
+        caption.textContent = kind === 'control' ? `${representation.label} Control` : `${representation.label} Prediction`;
+
+        figure.append(video, caption);
+        return figure;
+      };
+
+      const renderControlPanels = () => {
+        if (!controlPanelHost) return;
+
+        document.querySelectorAll('.control-viewer > [data-control-panel]').forEach((panel) => panel.remove());
+        controlPanelHost.innerHTML = '';
+
+        controlCases.forEach((controlCase, caseIndex) => {
+          const panel = document.createElement('article');
+          panel.className = `control-panel${caseIndex === 0 ? ' is-active' : ''}`;
+          panel.dataset.controlPanel = controlCase.key;
+
+          const headerRow = document.createElement('div');
+          headerRow.className = 'control-row is-header';
+          headerRow.appendChild(document.createElement('div'));
+          controlRepresentations.forEach((representation) => {
+            const group = document.createElement('div');
+            group.className = `control-group-label ${representation.key}`;
+            group.style.gridColumn = 'span 2';
+            group.innerHTML = `${representation.label}<br><span>Control / Prediction</span>`;
+            headerRow.appendChild(group);
+          });
+          panel.appendChild(headerRow);
+
+          controlMethods.forEach((method) => {
+            const row = document.createElement('div');
+            row.className = 'control-row';
+
+            const label = document.createElement('div');
+            label.className = 'control-row-label';
+            label.innerHTML = method.label;
+            row.appendChild(label);
+
+            controlRepresentations.forEach((representation) => {
+              row.appendChild(createControlFigure(controlCase, method, representation, 'control'));
+              row.appendChild(createControlFigure(controlCase, method, representation, 'pred'));
+            });
+
+            panel.appendChild(row);
+          });
+
+          controlPanelHost.appendChild(panel);
+        });
+
+        controlPanels = controlPanelHost.querySelectorAll('[data-control-panel]');
+      };
+
+      renderControlPanels();
+
+      const activateControlPanel = (panelName) => {
+        controlTabs.forEach((tab) => {
+          const isActive = tab.dataset.controlTab === panelName;
+          tab.classList.toggle('is-active', isActive);
+          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        controlPanels.forEach((panel) => {
+          const isActive = panel.dataset.controlPanel === panelName;
+          panel.classList.toggle('is-active', isActive);
+          panel.querySelectorAll('video').forEach((video) => {
+            if (isActive) {
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+            }
+          });
+        });
+      };
+
+      controlTabs.forEach((tab) => {
+        tab.addEventListener('click', () => activateControlPanel(tab.dataset.controlTab));
+      });
+
+      activateControlPanel('alcohol');
 
       const initPerceptionMeshViewer = () => {
         if (perceptionViewerState || !perceptionMeshViewport) return;
