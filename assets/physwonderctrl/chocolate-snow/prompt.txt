@@ -1,0 +1,1 @@
+A snow chocolate with Young's modulus E=40000 starts on the ground, initially moving to the right, causing deformation.

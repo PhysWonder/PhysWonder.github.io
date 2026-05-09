@@ -1,0 +1,1 @@
+A rigid banana starts on the ground, initially moving to the right, causing deformation.
