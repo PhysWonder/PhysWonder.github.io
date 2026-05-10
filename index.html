@@ -210,7 +210,7 @@
     }
     .teaser-hotspot[data-object="mug"]{left:39%;top:38%;--label-x:-254px;--label-y:-50%;--hotspot-accent:#0a84ff;--ring:rgba(10,132,255,.34)}
     .teaser-hotspot[data-object="bear"]{left:63%;top:71%;--label-x:34px;--label-y:-50%;--hotspot-accent:#ff3b30;--ring:rgba(255,59,48,.30)}
-    .teaser-hotspot[data-object="duck"]{left:35%;top:72%;--label-x:-150px;--label-y:-50%;--hotspot-accent:#20a464;--ring:rgba(32,164,100,.30)}
+    .teaser-hotspot[data-object="duck"]{left:35%;top:72%;--label-x:-170px;--label-y:-50%;--hotspot-accent:#20a464;--ring:rgba(32,164,100,.30)}
     .teaser-hotspot[data-object="snowman"]{left:65%;top:36%;--label-x:34px;--label-y:-50%}
     .teaser-hotspot-label{
       position:absolute;
@@ -276,11 +276,16 @@
       color:#667080;
     }
     .teaser-inline-hint strong{
-      font-family:"Trebuchet MS", "Microsoft YaHei", "PingFang SC", sans-serif;
-      font-size:17px;
-      font-weight:900;
-      color:#152033;
-      letter-spacing:0;
+      font-family:"Fraunces", "Trebuchet MS", "Microsoft YaHei", "PingFang SC", serif;
+      font-size:18px;
+      font-weight:700;
+      letter-spacing:.01em;
+      background:linear-gradient(90deg, #ff5f6d 0%, #ffc371 25%, #47c7ff 55%, #7f5bff 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 6px 18px rgba(15,23,42,.12);
     }
     .teaser-inline-hint span{
       font-size:13px;
@@ -482,6 +487,13 @@
       border-radius:16px;
       overflow:hidden;
       background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,248,250,.94));
+    }
+    .reference-free-table{
+      grid-column:1 / -1;
+      overflow-x:auto;
+    }
+    .reference-free-table table{
+      min-width:980px;
     }
     .results-table table{
       width:100%;
@@ -989,6 +1001,23 @@
     .ctrl-teaser-panel{
       width:min(1780px, 100%);
     }
+    .ctrl-teaser-panel .physwonderctrl-table-head,
+    .ctrl-teaser-panel .physwonderctrl-object-row{
+      grid-template-columns:minmax(240px, 0.95fr) repeat(5, minmax(155px, 1fr));
+      gap:10px;
+      min-width:1180px;
+    }
+    .ctrl-teaser-panel .physwonder3d-prompt{
+      min-height:120px;
+      padding:14px 16px;
+    }
+    .ctrl-teaser-panel .physwonder3d-prompt p{
+      font-size:14px;
+      line-height:1.25;
+    }
+    .ctrl-teaser-panel .physwonder3d-media{
+      aspect-ratio:4/3.25;
+    }
     .interactive-teaser-body{
       padding:20px 24px 24px;
     }
@@ -1158,19 +1187,22 @@
     }
     .latent-predictor-compare{
       display:grid;
-      gap:12px;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:16px;
       overflow-x:auto;
       padding-bottom:4px;
     }
     .latent-compare-head,
     .latent-compare-row{
       display:grid;
-      grid-template-columns:minmax(230px,.85fr) repeat(2, minmax(260px,1fr));
-      gap:12px;
+      grid-template-columns:minmax(190px,.8fr) repeat(2, minmax(200px,1fr));
+      gap:10px;
       align-items:stretch;
-      min-width:860px;
+      min-width:0;
     }
     .latent-compare-head{
+      grid-column:1 / -1;
+      grid-template-columns:minmax(190px,.8fr) repeat(2, minmax(200px,1fr)) minmax(190px,.8fr) repeat(2, minmax(200px,1fr));
       padding:0 4px;
       color:#526174;
       font-size:12px;
@@ -1179,7 +1211,7 @@
       text-transform:uppercase;
     }
     .latent-compare-row{
-      padding:12px;
+      padding:8px;
       border:1px solid rgba(17,17,17,.08);
       border-radius:18px;
       background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,248,250,.94));
@@ -1205,7 +1237,7 @@
       color:inherit;
     }
     .latent-predictor-compare .physwonder3d-media{
-      aspect-ratio:4/3;
+      aspect-ratio:4/3.8;
       border-radius:12px;
     }
     .latent-predictor-compare .physwonder3d-media figcaption{
@@ -1213,6 +1245,11 @@
       max-width:calc(100% - 20px);
       white-space:normal;
       border-radius:10px;
+    }
+    @media (max-width: 1100px){
+      .latent-predictor-compare{
+        grid-template-columns:1fr;
+      }
     }
     .physwonder3d-table-head{
       padding:0 4px;
@@ -1292,10 +1329,11 @@
       text-wrap:balance;
       text-shadow:0 2px 12px rgba(0,0,0,.36);
     }
-    .physwonder3d-prompt .material{
+    .material{
       color:#ff1f1f;
-      font-size:1.18em;
+      font-weight:900;
       font-style:italic;
+      font-size:1.18em;
       text-shadow:0 0 18px rgba(255,31,31,.28);
     }
     .physwonder3d-media{
@@ -1621,7 +1659,7 @@
       }
       .teaser-hotspot[data-object="mug"]{left:38%;top:38%;--label-x:-218px;--label-y:-50%}
       .teaser-hotspot[data-object="bear"]{left:63%;top:71%;--label-x:25px}
-      .teaser-hotspot[data-object="duck"]{left:35%;top:72%;--label-x:-118px}
+      .teaser-hotspot[data-object="duck"]{left:35%;top:72%;--label-x:-132px}
       .teaser-hotspot[data-object="snowman"]{left:64%;top:36%;--label-x:25px}
     }
     @media (max-width: 520px){
@@ -1669,13 +1707,6 @@
             <span class="btn-copy">
               <span class="btn-kicker">Highlights</span>
               <span class="btn-label">PhysWonder-Ctrl</span>
-            </span>
-            <span class="btn-arrow">-&gt;</span>
-          </a>
-          <a class="btn" href="#more-info">
-            <span class="btn-copy">
-              <span class="btn-kicker">More Information</span>
-              <span class="btn-label">Key Figures</span>
             </span>
             <span class="btn-arrow">-&gt;</span>
           </a>
@@ -2507,26 +2538,29 @@
             <div>
               <h3> Can the Control Latent Predictor Learn Material-Response Aware Controls? </h3>
               <p>
-                We compare generation with the learned control latent predictor against prompt-only generation using the same reference condition. The predictor produces material-response-aware controls without explicit test-time control videos, improving constitutive behavior across sand, snow, elastic, and rigid examples.
+                Using the same backbone and training data, we compare PhysWonder-Ctrl with a prompt-only fine-tuned baseline. At inference time, both methods rely only on the reference image and text prompt, without explicit deformation-gradient videos. PhysWonder-Ctrl produces more material-aware dynamics, including shape-preserving rigid motion, visible elastic deformation, and plastic collapse or spreading, suggesting that it learns deformation-informed latent controls beyond simple prompt tuning.
               </p>
             </div>
           </div>
           <div class="latent-predictor-compare" aria-label="Control latent predictor comparison">
             <div class="latent-compare-head" aria-hidden="true">
               <span>Prompt</span>
-              <span>Control Latent Predictor</span>
-              <span>Prompt Only</span>
+              <span>PhysWonder-Ctrl<br>Predicted Control Latent</span>
+              <span>Wan2.1-TI2V-1.3B<br>Prompt Fine-Tuning</span>
+              <span>Prompt</span>
+              <span>PhysWonder-Ctrl<br>Predicted Control Latent</span>
+              <span>Wan2.1-TI2V-1.3B<br>Prompt Fine-Tuning</span>
             </div>
 
             <article class="latent-compare-row">
               <div class="latent-prompt">
-                <p>"A Sand water cup with Young's modulus E=4000 starts on the ground, initially moving to the right, causing deformation."</p>
+                <p>"A <span class="material">Sand</span> water cup with Young's modulus E=4000 starts on the ground, initially moving to the right, causing deformation."</p>
               </div>
               <figure class="physwonder3d-media">
                 <video controls autoplay muted loop playsinline preload="metadata">
                   <source src="assets/representation-compare/sample_2_pred_control_gen.mp4" type="video/mp4">
                 </video>
-                <figcaption>Control Latent Predictor</figcaption>
+                <figcaption>Control Latent Predictor<br>Prompt Only</figcaption>
               </figure>
               <figure class="physwonder3d-media">
                 <video controls autoplay muted loop playsinline preload="metadata">
@@ -2538,13 +2572,13 @@
 
             <article class="latent-compare-row">
               <div class="latent-prompt">
-                <p>"A Snow alcohol with Young's modulus E=1000 starts on the ground, initially moving to the right, causing deformation."</p>
+                <p>"A <span class="material">Snow</span> alcohol with Young's modulus E=1000 starts on the ground, initially moving to the right, causing deformation."</p>
               </div>
               <figure class="physwonder3d-media">
                 <video controls autoplay muted loop playsinline preload="metadata">
                   <source src="assets/representation-compare/sample_21_pred_control_gen.mp4" type="video/mp4">
                 </video>
-                <figcaption>Control Latent Predictor</figcaption>
+                <figcaption>Control Latent Predictor<br>Prompt Only</figcaption>
               </figure>
               <figure class="physwonder3d-media">
                 <video controls autoplay muted loop playsinline preload="metadata">
@@ -2556,13 +2590,13 @@
 
             <article class="latent-compare-row">
               <div class="latent-prompt">
-                <p>"An Elastic banana with Young's modulus E=10000 starts on the ground, initially moving to the top, causing deformation."</p>
+                <p>"An <span class="material">Elastic</span> banana with Young's modulus E=10000 starts on the ground, initially moving to the top, causing deformation."</p>
               </div>
               <figure class="physwonder3d-media">
                 <video controls autoplay muted loop playsinline preload="metadata">
                   <source src="assets/representation-compare/sample_245_pred_control_gen.mp4" type="video/mp4">
                 </video>
-                <figcaption>Control Latent Predictor</figcaption>
+                <figcaption>Control Latent Predictor<br>Prompt Only</figcaption>
               </figure>
               <figure class="physwonder3d-media">
                 <video controls autoplay muted loop playsinline preload="metadata">
@@ -2574,13 +2608,13 @@
 
             <article class="latent-compare-row">
               <div class="latent-prompt">
-                <p>"A Rigid donut starts on the ground, initially moving to the right, without visible deformation."</p>
+                <p>"A <span class="material">Rigid</span> donut starts on the ground, initially moving to the right, without visible deformation."</p>
               </div>
               <figure class="physwonder3d-media">
                 <video controls autoplay muted loop playsinline preload="metadata">
                   <source src="assets/representation-compare/sample_161_pred_control_gen.mp4" type="video/mp4">
                 </video>
-                <figcaption>Control Latent Predictor</figcaption>
+                <figcaption>Control Latent Predictor<br>Prompt Only</figcaption>
               </figure>
               <figure class="physwonder3d-media">
                 <video controls autoplay muted loop playsinline preload="metadata">
@@ -2589,11 +2623,54 @@
                 <figcaption>Prompt Only</figcaption>
               </figure>
             </article>
+            <div class="results-table reference-free-table" aria-label="Reference-free comparison of material-response plausibility">
+              <table>
+                <caption>
+                  <strong>Reference-free comparison of material-response plausibility.</strong>
+                  We include the closed-source model under limited access, using reference-free metrics and multi-VLM pairwise wins.
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Seedance 2.0</th>
+                    <th>Wan2.1-TI2V-1.3B</th>
+                    <th>PhysWonder-3D</th>
+                    <th>PhysWonder-Ctrl<br>GT Deformation-Gradient</th>
+                    <th>PhysWonder-Ctrl<br>Predicted Control Latent</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Diff<sub>SSIM</sub> ↑</td>
+                    <td class="best">0.38</td>
+                    <td>0.00</td>
+                    <td class="second">0.33</td>
+                    <td class="third">0.29</td>
+                    <td>0.21</td>
+                  </tr>
+                  <tr>
+                    <td>Diff<sub>CLIP</sub> ↑</td>
+                    <td>1.02</td>
+                    <td>1.00</td>
+                    <td class="best">1.11</td>
+                    <td class="second">1.06</td>
+                    <td class="third">1.04</td>
+                  </tr>
+                  <tr>
+                    <td>VLM Wins ↑</td>
+                    <td class="third">1.6/4</td>
+                    <td>0.1/4</td>
+                    <td class="best">4.0/4</td>
+                    <td class="second">3.0/4</td>
+                    <td>1.3/4</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         
         
         </div>
-  
 
 
 
@@ -2695,7 +2772,7 @@
             </div>
             <div class="card-body">
               <h4>Mesh Preview</h4>
-              <p>The original mug OBJ is copied into the site assets and converted into an inline payload for direct browser display.</p>
+              <p>A mesh asset reconstructed from a single image can be simulated directly in the Decomposition-Based Hybrid MPM pipeline, then rendered by the remaining PhysWonder-3D modules into high-fidelity videos.</p>
             </div>
           </article>
         </div>
@@ -2848,7 +2925,7 @@
       <div class="predictor-header">
         <div class="predictor-title">
           <div class="eyebrow">Interactive Teaser</div>
-          <h3 id="physwonder-ctrl-title">PhysWonder-Ctrl Outputs</h3>
+          <h3 id="physwonder-ctrl-title">PhysWonder-Ctrl: Dual-Branch Modeling with Internalized Constitutive Representation</h3>
           <p>We show the same object under two constitutive controls and align each prompt with five comparison videos: PhysWonder-3D engine-in-the-loop ground truth, PhysWonder-Ctrl, Wan2.1-TI2V-1.3B fine-tuning, Seedance 2.0, and VideoREPA.</p>
         </div>
         <button class="predictor-close" type="button" aria-label="Close PhysWonder-Ctrl detail" data-modal-close="physwonder-ctrl-modal">X</button>
@@ -2861,7 +2938,7 @@
             <span>PhysWonder-Ctrl<br>Ours</span>
             <span>Wan2.1-TI2V-1.3B<br>Fine-Tuning (Prompt)</span>
             <span>Seedance 2.0<br>Closed-Source SOTA Model</span>
-            <span>VideoREPA</span>
+            <span>VideoREPA<br>NeurIPS-25</span>
           </div>
 
           <article class="physwonderctrl-object-row" data-object="banana-elastic">
