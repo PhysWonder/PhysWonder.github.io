@@ -208,9 +208,9 @@
       outline:none;
       box-shadow:0 0 0 4px rgba(10,132,255,.16), 0 18px 34px rgba(15,23,42,.18);
     }
-    .teaser-hotspot[data-object="mug"]{left:39%;top:38%;--label-x:-254px;--label-y:-50%;--hotspot-accent:#0a84ff;--ring:rgba(10,132,255,.34)}
-    .teaser-hotspot[data-object="bear"]{left:63%;top:71%;--label-x:34px;--label-y:-50%;--hotspot-accent:#ff3b30;--ring:rgba(255,59,48,.30)}
-    .teaser-hotspot[data-object="duck"]{left:35%;top:72%;--label-x:-170px;--label-y:-50%;--hotspot-accent:#20a464;--ring:rgba(32,164,100,.30)}
+    .teaser-hotspot[data-object="mug"]{left:40%;top:58%;--label-x:-254px;--label-y:-50%;--hotspot-accent:#0a84ff;--ring:rgba(10,132,255,.34)}
+    .teaser-hotspot[data-object="bear"]{left:58%;top:44%;--label-x:34px;--label-y:-50%;--hotspot-accent:#ff3b30;--ring:rgba(255,59,48,.30)}
+    .teaser-hotspot[data-object="duck"]{left:63%;top:72%;--label-x:34px;--label-y:-50%;--hotspot-accent:#20a464;--ring:rgba(32,164,100,.30)}
     .teaser-hotspot[data-object="snowman"]{left:65%;top:36%;--label-x:34px;--label-y:-50%}
     .teaser-hotspot-label{
       position:absolute;
@@ -1510,6 +1510,21 @@
       overflow:hidden;
       box-shadow:0 18px 34px rgba(15,23,42,.08);
     }
+    .perception-card--multiview .perception-image-frame{
+      aspect-ratio:16 / 9;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      background:#fff;
+    }
+    .perception-card--multiview .perception-image-frame img{
+      width:auto;
+      height:100%;
+      max-width:none;
+      transform:rotate(90deg);
+      transform-origin:center;
+    }
     .perception-card .card-body{
       padding:16px 18px 18px;
     }
@@ -1657,9 +1672,9 @@
       .teaser-hotspot-label span{
         font-size:10px;
       }
-      .teaser-hotspot[data-object="mug"]{left:38%;top:38%;--label-x:-218px;--label-y:-50%}
-      .teaser-hotspot[data-object="bear"]{left:63%;top:71%;--label-x:25px}
-      .teaser-hotspot[data-object="duck"]{left:35%;top:72%;--label-x:-132px}
+      .teaser-hotspot[data-object="mug"]{left:40%;top:58%;--label-x:25px;--label-y:-50%}
+      .teaser-hotspot[data-object="bear"]{left:58%;top:44%;--label-x:25px}
+      .teaser-hotspot[data-object="duck"]{left:63%;top:72%;--label-x:25px}
       .teaser-hotspot[data-object="snowman"]{left:64%;top:36%;--label-x:25px}
     }
     @media (max-width: 520px){
@@ -1718,13 +1733,15 @@
             <div class="eyebrow">Abstract</div>
             <!-- <h3>Abstract</h3> -->
             <p><small>
-              The physical world is governed by material-dependent constitutive behaviors, yet current video generation models still struggle to produce physically plausible and controllable dynamics across diverse materials.
-              Existing approaches either rely on external simulators to provide coarse physical motion or use simplified control signals such as trajectories and sparse forces; as a result, they often control visible motion without modeling how materials respond to interactions.
-              Our key insight is that constitutive representations can bridge this gap by describing the material response that links external interactions to deformation and motion.
-              We present <strong>PhysWonder</strong>, a unified framework for physically controllable video generation built around simulation-coupled constitutive representations.
-              Our framework consists of <strong>PhysWonder-3D</strong>, which enables unified constitutive simulation and scalable physically grounded data synthesis through a decomposition-based hybrid Material Point Method, and <strong>PhysWonder-Ctrl</strong>, which uses a dual-branch video generation architecture to internalize deformation-gradient-based constitutive control.
-              By treating deformation gradients as simulation-coupled intermediate supervision, joint training improves deformation-gradient-guided generation and learns constitutive-aware latent control without requiring explicit control videos during inference.
-              Experiments show that PhysWonder achieves state-of-the-art synthesis efficiency and robustness, and improves physical controllability, video fidelity, and motion consistency under both explicit deformation-gradient control and control-free inference.
+              With the rapid progress of video generation models, researchers have begun to explore whether they can serve as simulators of the physical world.
+              Existing methods usually rely on external simulators to generate explicit motion proxies, such as point clouds, particles, or trajectories, which are then projected into the video domain and refined by a video generator.
+              Another line of work translates motion information into simplified or pixel-space control conditions to guide the video generator.
+              Despite different pipelines, both paradigms ultimately rely on projected motion cues, which provide limited support for modeling material responses under changing interactions.
+              Our key insight is that constitutive-state representations can bridge this gap by describing the material response that links external interactions to deformation and motion.
+              We present <strong>PhysWonder</strong>, a unified framework for physically controllable video generation built around simulation-coupled constitutive-state representations.
+              Our framework consists of <strong>PhysWonder-3D</strong>, which enables unified constitutive simulation and scalable physically grounded data synthesis through a decomposition-based hybrid Material Point Method, and <strong>PhysWonder-Ctrl</strong>, which uses a dual-branch video generation architecture to internalize deformation-gradient-based constitutive-state control.
+              By treating deformation gradients as constitutive-aware supervision, joint training strengthens deformation-gradient control and learns constitutive-aware latent control without requiring explicit control videos during inference.
+              Experiments show that PhysWonder achieves state-of-the-art synthesis efficiency and robustness among simulator-coupled baselines, and improves controllability, fidelity, and motion consistency under both explicit deformation-gradient control and control-free inference.
             </small></p>
           </div>
         </article>
@@ -1735,7 +1752,10 @@
           </div>
           <figcaption class="figcap">
             <div class="framework-copy">
-              <strong>PhysWonder: Scalable World Building with Internalized Constitutive Control.</strong> (a) State-of-the-art generators often miss material-dependent dynamics, producing collapse, hallucination, rigidification, incoherence, or no material response. (b) PhysWonder-3D builds scalable engine-in-the-loop constitutive simulations and exposes deformation gradients as supervision for particle motion and material response. (c) PhysWonder-Ctrl internalizes this representation through joint modeling, strengthening deformation-gradient control while supporting inference without explicit control videos.
+              <strong>PhysWonder: Scalable Constitutive-State Representations for Video Generation.</strong> 
+              (a) Middle: PhysWonder addresses a fundamental limitation of existing video generators. They can synthesize plausible-looking motion, but often fail to capture how materials respond to interactions, such as remaining rigid, elastically deforming, or plastically yielding. We propose scalable simulation-coupled constitutive-state representations that link material properties, deformation, and motion, and show that they can be internalized by video generation models.
+              (b) Left: Existing baselines often fail under diverse material responses, causing collapse, hallucination, rigidification, or incoherence. PhysWonder-3D improves robustness and efficiency through unified constitutive simulation and produces aligned videos with deformation-gradient representations.
+              (c) Right: PhysWonder-Ctrl internalizes deformation-gradient controls as generator-adapted latents. Joint training preserves particle motion and material response, while the predictor enables inference without explicit control videos.          
             </div>
           </figcaption>
         </figure>
@@ -1776,7 +1796,7 @@
         <article class="card hero-video-card">
           <div class="video-shell">
             <video controls muted loop playsinline poster="assets/posters/teaser-main.jpg">
-              <source src="assets/videos/teaser_main.mp4" type="video/mp4" />
+              <source src="assets/videos/full-video.mp4" type="video/mp4" />
             </video>
             <!-- <div class="teaser-caption">
               <span class="pill">PhysWonder-3D · Unified multi-material simulation</span>
@@ -1828,7 +1848,9 @@
               <img class="figure-image" src="assets/figures/PhysWonder-3D_Pipeline.png" alt="PhysWonder-3D framework figure">
             </div>
             <figcaption class="figcap">
-              <strong>PhysWonder-3D: Scalable Physically Aligned Data Synthesis.</strong> Our pipeline combines constitutive sampling guided by Vision-Language Models (VLMs) and high-fidelity physical simulation to generate physically aligned videos and deformation-gradient-based representations.
+              <strong>PhysWonder-3D: Scalable Constitutive-State Representation Synthesis.</strong> 
+              (a) Simulation-ready world building: Assets or images are converted into executable physical scenes via perception, geometry recovery, and unified constitutive simulation.
+              (b) Scalable data synthesis: VLM-guided annotation and physics-aligned rendering produce aligned videos and constitutive-state representations of particle motion, deformation gradients, and material response.
             </figcaption>
           </figure>
 
@@ -1880,6 +1902,24 @@
               </div>
 
               <div class="comparison-row">
+                <div class="comparison-cell comparison-label">Mug<br><span class="asset-meta">Rigid</span></div>
+                <div class="comparison-cell"><div class="gif-tile gif-missing"><span>Simulation failed</span></div></div>
+                <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/WonderPlay/mug.gif" alt="Mug - WonderPlay"></div></div>
+                <div class="comparison-cell"><div class="gif-tile gif-missing"><span>Simulation failed</span></div></div>
+                <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/RealWonder/mug.gif" alt="Mug - RealWonder"></div></div>
+                <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/PhysWonder-3D/mug.gif" alt="Mug - PhysWonder-3D"><span class="constitutive-tag">Rigid</span></div></div>
+              </div>
+
+              <div class="comparison-row">
+                <div class="comparison-cell comparison-label">Table<br><span class="asset-meta">Rigid</span></div>
+                <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/PhysGen3D/table.gif" alt="Table - PhysGen3D"></div></div>
+                <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/WonderPlay/table.gif" alt="Table - WonderPlay"></div></div>
+                <div class="comparison-cell"><div class="gif-tile gif-missing"><span>Simulation failed</span></div></div>
+                <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/RealWonder/table.gif" alt="Table - RealWonder"></div></div>
+                <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/PhysWonder-3D/table.gif" alt="Table - PhysWonder-3D"><span class="constitutive-tag">Rigid</span></div></div>
+              </div>
+
+              <div class="comparison-row">
                 <div class="comparison-cell comparison-label">Bread<br><span class="asset-meta">Sand (E = 1e4)</span></div>
                 <div class="comparison-cell"><div class="gif-tile gif-missing"><span>Simulation failed</span></div></div>
                 <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/WonderPlay/bread.gif" alt="Bread - WonderPlay"></div></div>
@@ -1922,6 +1962,15 @@
                 <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/PerpetualWonder/shoe.gif" alt="Shoe - PerpetualWonder"></div></div>
                 <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/RealWonder/shoe.gif" alt="Shoe - RealWonder"></div></div>
                 <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/PhysWonder-3D/shoe.gif" alt="Shoe - PhysWonder-3D"><span class="constitutive-tag">Elastic</span></div></div>
+              </div>
+
+              <div class="comparison-row">
+                <div class="comparison-cell comparison-label">Toy<br><span class="asset-meta">Elastic (E = 6.5e4)</span></div>
+                <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/PhysGen3D/toy.gif" alt="Toy - PhysGen3D"></div></div>
+                <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/WonderPlay/toy.gif" alt="Toy - WonderPlay"></div></div>
+                <div class="comparison-cell"><div class="gif-tile gif-missing"><span>Simulation failed</span></div></div>
+                <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/RealWonder/toy.gif" alt="Toy - RealWonder"></div></div>
+                <div class="comparison-cell"><div class="gif-tile"><img src="assets/gifs/comparison/PhysWonder-3D/toy.gif" alt="Toy - PhysWonder-3D"><span class="constitutive-tag">Elastic</span></div></div>
               </div>
             </div>
           </div>
@@ -2010,7 +2059,11 @@
               </div>
             </div>
             <figcaption class="figcap">
-              <strong>The Pipeline of PhysWonder-Ctrl.</strong> We propose a dual-branch joint modeling framework that leverages deformation gradients as intermediate physical representations for physically controllable video generation. <strong>Click the 🔎 Control Latent Predictor Framework button on the figure to view details.</strong>
+              <strong>PhysWonder-Ctrl: Internalizing Constitutive Latents.</strong> 
+              (a) Initialization: PhysWonder-3D produces prompts, aligned videos, and deformation-gradient controls from reference images and physical parameters.
+              (b) Training: Joint modeling turns deformation-gradient representations into generator-adapted control latents.
+              (c) Inference: The predictor provides internalized latents for material-aware generation and control-free inference. 
+              <strong>Click the 🔎 Control Latent Predictor Framework button on the figure to view details.</strong>
             </figcaption>
           </figure>
 
@@ -2671,10 +2724,25 @@
         
         
         </div>
-
-
-
   </main>
+
+  <section id="conclusion" class="section">
+    <div class="container">
+      <article class="card hero-abstract">
+        <div class="card-body">
+          <div class="eyebrow">Conclusion, Limitations and Future Work</div>
+          <p><small>
+            We presented <strong>PhysWonder</strong>, a framework that connects constitutive simulation with physically controllable video generation.
+            PhysWonder-3D provides efficient engine-in-the-loop synthesis across diverse materials, while PhysWonder-Ctrl internalizes deformation-gradient-based control for material-aware dynamic generation.
+            Within our planned computational budget, experiments validate the proposed constitutive-state representation and joint modeling framework, demonstrating material-response control beyond motion-level guidance.
+            PhysWonder remains partly limited by pretrained upstream modules, whose errors may affect world building and output quality.
+            Future work includes scaling to larger generative models and developing engine-in-the-loop evaluation into a more objective protocol for physical consistency assessment.
+            More broadly, our physically aligned synthesis pipeline may support deformable manipulation, flexible grasping, and material-aware planning.
+          </small></p>
+        </div>
+      </article>
+    </div>
+  </section>
 
   <div class="predictor-modal" id="predictor-modal" aria-hidden="true">
     <div class="predictor-panel" role="dialog" aria-modal="true" aria-labelledby="predictor-title">
@@ -2682,7 +2750,7 @@
         <div class="predictor-title">
           <div class="eyebrow">Predictor Detail</div>
           <h3 id="predictor-title">PhysWonder-Ctrl Predictor</h3>
-          <p>Detailed Architecture of the Control Latent Predictor in PhysWonder-Ctrl. The predictor fuses pooled text and image conditions, expands the reference latent into a spatiotemporal feature tensor, and predicts the control latent through stacked FiLM-conditioned 3D residual blocks.</p>
+          <p>Detailed Architecture of the Control Latent Predictor in PhysWonder-Ctrl. The predictor takes text embeddings, image features, and the reference latent as inputs. It first pools and projects text/image features to form a fused condition vector, expands the reference latent into a spatiotemporal feature tensor, and then uses the condition vector to FiLM-modulate stacked 3D residual blocks for predicting the control latent.</p>
           <div class="predictor-chips">
             <span class="predictor-chip">Latent control branch</span>
             <span class="predictor-chip">Detailed network view</span>
@@ -2735,7 +2803,7 @@
               <p>Inpainted scene after removing the foreground mug region.</p>
             </div>
           </article>
-          <article class="perception-card">
+          <article class="perception-card perception-card--multiview">
             <div class="perception-image-frame">
               <img src="assets/perception/mug/display/multiview_mug1_1280x720.jpg" alt="Multi-view generation result for the mug">
             </div>
@@ -2858,7 +2926,7 @@
 
           <article class="physwonder3d-object-row" data-object="bear">
             <div class="physwonder3d-prompt">
-              <p>"A <span class="material">Sand</span> bear with E=8e4, causing deformation."</p>
+              <p>"A <span class="material">Plastic</span> bear with E=8e4, causing deformation."</p>
             </div>
             <figure class="physwonder3d-media">
               <video controls autoplay muted loop playsinline preload="metadata" poster="assets/physwonder3d/bear/deformation.gif">
